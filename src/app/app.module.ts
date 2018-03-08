@@ -7,6 +7,7 @@ import {AboutPage} from '../pages/about/about';
 import {ContactPage} from '../pages/contact/contact';
 import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
+import {PlantListPage} from '../pages/plant-list/plant-list'
 
 import {TitleBarComponent} from "../components/title-bar/title-bar";
 
@@ -20,7 +21,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     ContactPage,
     HomePage,
     TabsPage,
-    TitleBarComponent
+    TitleBarComponent,
+    PlantListPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    PlantListPage
   ],
   providers: [
     StatusBar,

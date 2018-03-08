@@ -9,7 +9,7 @@
     </ion-buttons>
     <ion-title>{{pageTitle}}</ion-title>
 
-    <ion-buttons *ngIf="(isSearch !== ('0' || 'false'))" end>
+    <ion-buttons *ngIf="isSearch !== ('0' && 'false')" end>
       <button ion-button icon-only>
         <ion-icon name="search"></ion-icon>
       </button>

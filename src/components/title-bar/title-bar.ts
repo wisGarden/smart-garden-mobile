@@ -14,12 +14,13 @@ export class TitleBarComponent {
 
   @Input() pageTitle: string;
 
-  @Input() isSearch: Boolean;
+  @Input() isSearch: string;
 
   constructor() {
     console.log('Hello TitleBarComponent Component');
     this.pageTitle = '植物大全';
-    this.isSearch = false;
+    console.log(this.pageTitle);
+    console.log(this.isSearch);
   }
 
 }
