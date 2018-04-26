@@ -1,0 +1,71 @@
+page-find {
+  .margin-top-3 {
+    margin-top: 3.0em;
+  }
+
+  .card-background-page {
+    border: 1px solid #479DF7;
+    border-radius: 0.3em;
+    box-shadow: 0 1px 2px rgba(71, 157, 247, 0.3);
+    padding: 1% 1.5em;
+    height: 9em;
+  }
+
+  .card-background-page:active {
+    background-color: #EFEFEF;
+  }
+
+  .img-style {
+    display: inline-block;
+    width: 6.5em;
+    float: left;
+    margin: 0.5em auto;
+  }
+
+  .img-style2 {
+    display: inline-block;
+    width: 6.0em;
+    float: left;
+    margin: 0.5em 0.5em 0.5em 0;
+  }
+
+  .img-style3 {
+    display: inline-block;
+    width: 7.0em;
+    float: left;
+    margin: 0.8em -0.1em 0.6em -0.4em;
+  }
+
+  .card-background-page span {
+    display: inline-block;
+    margin: 1.3em 0.5em;
+    height: 5.5em;
+    width: 0.1em;
+    float: left;
+    background-color: #479DF7;
+  }
+
+  .title-content {
+    display: inline-block;
+    margin: 1.8em -1em;
+    float: right;
+  }
+
+  .title {
+    font-size: 2em;
+    margin: 0 auto;
+    color: #479DF7;
+    text-align: left;
+  }
+
+  .subtitle {
+    font-size: 0.9em;
+    margin: 0 auto;
+    color: #479DF7;
+    text-align: left;
+  }
+
+  .block {
+    height: 5em;
+  }
+}
