@@ -26,7 +26,10 @@ import {SplashScreen} from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      iconMode: 'ios',//  在整个应用程序中为所有图标使用的模式。可用选项："ios"，"md"
+      mode: 'ios'//在整个应用程序中使用的模式。
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,4 +47,5 @@ import {SplashScreen} from '@ionic-native/splash-screen';
   ]
 })
 export class AppModule {
+
 }

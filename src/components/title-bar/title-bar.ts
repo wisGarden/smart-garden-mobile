@@ -11,16 +11,35 @@ import {Component, Input} from '@angular/core';
   templateUrl: 'title-bar.html'
 })
 export class TitleBarComponent {
-
   @Input() pageTitle: string;
-
+  @Input() startIconName: string;
+  @Input() searchIconName: string;
+  @Input() endIconName: string;
   @Input() isSearch: string;
 
   constructor() {
-    console.log('Hello TitleBarComponent Component');
     this.pageTitle = '植物大全';
-    console.log(this.pageTitle);
-    console.log(this.isSearch);
+    this.startIconName = 'close';
+    this.searchIconName = 'search';
+    this.endIconName = 'menu';
+  }
+
+  backClick() {
+    if (this.startIconName != "") {
+      alert("back");
+    }
+  }
+
+  rightClick() {
+    if (this.endIconName != "") {
+      alert("right");
+    }
+  }
+
+  searchClick() {
+    if (this.searchIconName != "") {
+      alert("search");
+    }
   }
 
 }

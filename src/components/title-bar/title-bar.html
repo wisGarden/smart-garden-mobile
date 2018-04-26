@@ -2,22 +2,22 @@
 <ion-header class="header">
   <ion-toolbar>
 
-    <ion-buttons start>
+    <ion-buttons start (click)="backClick()">
       <button ion-button icon-only>
-        <ion-icon name="close"></ion-icon>
+        <ion-icon name="{{startIconName}}"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>{{pageTitle}}</ion-title>
 
-    <ion-buttons *ngIf="isSearch !== ('0' && 'false')" end>
+    <ion-buttons *ngIf="isSearch !== ('0' && 'false')" end (click)="searchClick()">
       <button ion-button icon-only>
-        <ion-icon name="search"></ion-icon>
+        <ion-icon name="{{searchIconName}}"></ion-icon>
       </button>
     </ion-buttons>
 
-    <ion-buttons end>
+    <ion-buttons end (click)="rightClick()">
       <button ion-button icon-only>
-        <ion-icon name="menu"></ion-icon>
+        <ion-icon name="{{endIconName}}"></ion-icon>
       </button>
     </ion-buttons>
 

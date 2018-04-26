@@ -10,8 +10,8 @@ import {PlantListPage} from "../plant-list/plant-list";
 })
 export class TabsPage {
 
-  tab1Root = PlantListPage;
-  // tab1Root = HomePage;
+  // tab1Root = PlantListPage;
+  tab1Root = HomePage;
   tab2Root = AboutPage;
   tab3Root = ContactPage;
 

@@ -1,6 +1,5 @@
 // http://ionicframework.com/docs/theming/
 
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +13,46 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.color-blue {
+  color: #479DF7;
+}
+
+.background-blue {
+  background-color: #479DF7;
+}
+
+.ion-ios-home {
+  content: url('../assets/imgs/icon-main-choose.png');
+  height: 1em !important;
+  min-width: 0 !important;
+}
+
+.ion-ios-home-outline {
+  content: url('../assets/imgs/icon-main.png');
+  height: 1em !important;
+  min-width: 0 !important;
+}
+
+.ion-ios-find {
+  content: url('../assets/imgs/icon-find-choose.png');
+  height: 1em !important;
+  min-width: 0 !important;
+}
+
+.ion-ios-find-outline {
+  content: url('../assets/imgs/icon-find.png');
+  height: 1em !important;
+  min-width: 0 !important;
+}
+
+.ion-ios-mine {
+  content: url('../assets/imgs/icon-mine-choose.png');
+  height: 1em !important;
+  min-width: 0 !important;
+}
+
+.ion-ios-mine-outline {
+  content: url('../assets/imgs/icon-mine.png');
+  height: 1em !important;
+  min-width: 0 !important;
+}
