@@ -15,6 +15,7 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {Toast} from "@ionic-native/toast";
 import {FindPage} from "../pages/find/find";
+import {MinePage} from "../pages/mine/mine";
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import {FindPage} from "../pages/find/find";
         TabsPage,
         TitleBarComponent,
         PlantListPage,
-        FindPage
+        FindPage,
+        MinePage
     ],
     imports: [
         BrowserModule,
@@ -42,7 +44,8 @@ import {FindPage} from "../pages/find/find";
         HomePage,
         TabsPage,
         PlantListPage,
-        FindPage
+        FindPage,
+        MinePage
     ],
     providers: [
         StatusBar,

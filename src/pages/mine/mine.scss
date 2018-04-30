@@ -1,0 +1,68 @@
+page-mine {
+  .margin-top-3 {
+    margin-top: 3.0em;
+  }
+
+  .top-card {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 0.7em solid #EEF0EF;
+    margin: 0;
+    padding: 1.3em 1em 1em 1em;
+  }
+
+  .item {
+    padding: 0;
+    width: 70%;
+  }
+
+  .item img {
+    display: inline-block;
+    width: 4.5em;
+    height: 4.5em;
+  }
+
+  .item span {
+    display: inline-block;
+    height: 3.5em;
+    width: 0.1em;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+    background-color: #EEF0EF;
+  }
+
+  .button {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    margin-top: 2.5em;
+    border: 1px solid #479DF7;
+    background: none;
+    border-radius: 15px;
+    color: #479DF7;
+    font-size: 14px;
+    padding: 8px 22px;
+  }
+
+  .button:active {
+    background-color: #EFEFEF;
+  }
+
+  .list-item {
+    width: 100%;
+    border-top: none !important;
+  }
+
+  .list-item ion-label {
+    padding-left: 1em;
+  }
+
+  .list-item .item-inner {
+    border-bottom: 1px solid #ECEBEB !important;
+  }
+
+  .item-block {
+    border-bottom: none !important;
+  }
+}

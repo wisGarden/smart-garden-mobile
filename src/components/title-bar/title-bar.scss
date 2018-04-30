@@ -1,6 +1,6 @@
 title-bar {
   .toolbar-background {
-    background: white;
+    background: #F9F9F9;
     border: none;
     padding: 5px 0;
   }
@@ -10,5 +10,9 @@ title-bar {
   .header {
     height: 50px;
     font-size: 20px;
+  }
+  .line {
+    height: 2px;
+    background: rgba(74, 74, 74, 0.09);
   }
 }

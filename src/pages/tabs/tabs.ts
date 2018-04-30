@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
 
-import {AboutPage} from '../about/about';
-import {ContactPage} from '../contact/contact';
 import {HomePage} from '../home/home';
 import {PlantListPage} from "../plant-list/plant-list";
 import {Platform} from "ionic-angular";
 import {Toast} from "@ionic-native/toast";
 import {FindPage} from "../find/find";
+import {MinePage} from "../mine/mine";
 
 @Component({
     templateUrl: 'tabs.html'
@@ -18,7 +17,7 @@ export class TabsPage {
     // tab1Root = PlantListPage;
     tab1Root = HomePage;
     tab2Root = FindPage;
-    tab3Root = ContactPage;
+    tab3Root = MinePage;
 
     constructor(private platform: Platform, private toast: Toast) {
 

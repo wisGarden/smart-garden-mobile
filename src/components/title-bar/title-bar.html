@@ -1,25 +1,26 @@
 <!-- Generated template for the TitleBarComponent component -->
 <ion-header class="header">
-  <ion-toolbar>
+    <ion-toolbar>
 
-    <ion-buttons start (click)="backClick()">
-      <button ion-button icon-only>
-        <ion-icon name="{{startIconName}}"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>{{pageTitle}}</ion-title>
+        <ion-buttons start (click)="backClick()">
+            <button ion-button icon-only>
+                <ion-icon name="{{startIconName}}"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{pageTitle}}</ion-title>
 
-    <ion-buttons *ngIf="isSearch !== ('0' && 'false')" end (click)="searchClick()">
-      <button ion-button icon-only>
-        <ion-icon name="{{searchIconName}}"></ion-icon>
-      </button>
-    </ion-buttons>
+        <ion-buttons *ngIf="isSearch !== ('0' && 'false')" end (click)="searchClick()">
+            <button ion-button icon-only>
+                <ion-icon name="{{searchIconName}}"></ion-icon>
+            </button>
+        </ion-buttons>
 
-    <ion-buttons end (click)="rightClick()">
-      <button ion-button icon-only>
-        <ion-icon name="{{endIconName}}"></ion-icon>
-      </button>
-    </ion-buttons>
+        <ion-buttons end (click)="rightClick()">
+            <button ion-button icon-only>
+                <ion-icon name="{{endIconName}}"></ion-icon>
+            </button>
+        </ion-buttons>
 
-  </ion-toolbar>
+    </ion-toolbar>
+    <div class="line"></div>
 </ion-header>

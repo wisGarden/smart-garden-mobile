@@ -1,0 +1,21 @@
+<title-bar pageTitle="我的" startIconName="" searchIconName="" endIconName="" isSearch="true"></title-bar>
+
+
+<ion-content class="margin-top-3">
+    <ion-card class="top-card">
+        <ion-item class="item">
+            <ion-avatar item-start>
+                <img src="assets/imgs/avatar.png">
+                <span></span>
+            </ion-avatar>
+            <h1>AKIKO</h1>
+            <p>我认识很多花</p>
+        </ion-item>
+        <button class="button">登&nbsp;录</button>
+    </ion-card>
+    <ion-list>
+        <button class="list-item" ion-item *ngFor="let item of items" (click)="itemSelected(item)">
+            {{ item }}
+        </button>
+    </ion-list>
+</ion-content>
