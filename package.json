@@ -27,7 +27,7 @@
     "@ionic/storage": "2.1.3",
     "cordova-android": "7.0.0",
     "cordova-custom-config": "^5.0.2",
-    "cordova-fix-blackscreen": "file:../../../Downloads/cordova-fix-blackscreen-master",
+    "cordova-fix-blackscreen": "file:./cordova-fix-blackscreen-master",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^1.1.16",
