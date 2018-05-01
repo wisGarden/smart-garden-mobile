@@ -1,0 +1,29 @@
+page-plant-idt-photo {
+  .back {
+    background: url(../assets/imgs/back-plant-idt.png) no-repeat;
+    background-size: cover;
+  }
+  .child {
+    margin-top: 40vh;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+  .button-center {
+    display: inline-block;
+    background: url(../assets/imgs/icon-camera-button.png) no-repeat;
+    background-size: cover;
+    width: 12em;
+    height: 12em;
+  }
+  .button-center:active {
+    display: inline-block;
+    background: url(../assets/imgs/icon-camera-button-choose.png) no-repeat;
+    background-size: cover;
+    width: 12em;
+    height: 12em;
+  }
+  .label-center {
+    color: #989898;
+    font-size: 16px;
+  }
+}

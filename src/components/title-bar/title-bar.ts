@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {NavController} from "ionic-angular";
 
 /**
  * Generated class for the TitleBarComponent component.
@@ -7,39 +8,39 @@ import {Component, Input} from '@angular/core';
  * Components.
  */
 @Component({
-  selector: 'title-bar',
-  templateUrl: 'title-bar.html'
+    selector: 'title-bar',
+    templateUrl: 'title-bar.html'
 })
 export class TitleBarComponent {
-  @Input() pageTitle: string;
-  @Input() startIconName: string;
-  @Input() searchIconName: string;
-  @Input() endIconName: string;
-  @Input() isSearch: string;
+    @Input() pageTitle: string;
+    @Input() startIconName: string;
+    @Input() searchIconName: string;
+    @Input() endIconName: string;
+    @Input() isSearch: string;
 
-  constructor() {
-    this.pageTitle = '植物大全';
-    this.startIconName = 'close';
-    this.searchIconName = 'search';
-    this.endIconName = 'menu';
-  }
-
-  backClick() {
-    if (this.startIconName != "") {
-      alert("back");
+    constructor(public navCtrl: NavController) {
+        this.pageTitle = '植物大全';
+        this.startIconName = 'close';
+        this.searchIconName = 'search';
+        this.endIconName = 'menu';
     }
-  }
 
-  rightClick() {
-    if (this.endIconName != "") {
-      alert("right");
+    backClick() {
+        if (this.startIconName == "arrow-back") {
+            this.navCtrl.pop();
+        }
     }
-  }
 
-  searchClick() {
-    if (this.searchIconName != "") {
-      alert("search");
+    rightClick() {
+        if (this.endIconName != "") {
+            alert("right");
+        }
     }
-  }
+
+    searchClick() {
+        if (this.searchIconName != "") {
+            alert("search");
+        }
+    }
 
 }

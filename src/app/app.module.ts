@@ -16,6 +16,10 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {Toast} from "@ionic-native/toast";
 import {FindPage} from "../pages/find/find";
 import {MinePage} from "../pages/mine/mine";
+import {PlantIdtTabsPage} from "../pages/plant-idt-tabs/plant-idt-tabs";
+import {PlantIdtAlbumPage} from "../pages/plant-idt-album/plant-idt-album";
+import {PlantIdtPhotoPage} from "../pages/plant-idt-photo/plant-idt-photo";
+import {PlantIdtHistoryPage} from "../pages/plant-idt-history/plant-idt-history";
 
 @NgModule({
     declarations: [
@@ -27,11 +31,16 @@ import {MinePage} from "../pages/mine/mine";
         TitleBarComponent,
         PlantListPage,
         FindPage,
-        MinePage
+        MinePage,
+        PlantIdtTabsPage,
+        PlantIdtAlbumPage,
+        PlantIdtPhotoPage,
+        PlantIdtHistoryPage
     ],
     imports: [
         BrowserModule,
         IonicModule.forRoot(MyApp, {
+            tabsHideOnSubPages: true,
             iconMode: 'ios',//  在整个应用程序中为所有图标使用的模式。可用选项："ios"，"md"
             mode: 'ios'//在整个应用程序中使用的模式。
         })
@@ -45,7 +54,11 @@ import {MinePage} from "../pages/mine/mine";
         TabsPage,
         PlantListPage,
         FindPage,
-        MinePage
+        MinePage,
+        PlantIdtTabsPage,
+        PlantIdtAlbumPage,
+        PlantIdtPhotoPage,
+        PlantIdtHistoryPage
     ],
     providers: [
         StatusBar,

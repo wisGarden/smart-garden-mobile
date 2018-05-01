@@ -1,0 +1,22 @@
+page-plant-idt-history {
+  .back {
+    background: url(../assets/imgs/back-plant-idt.png) no-repeat;
+    background-size: cover;
+  }
+  .child {
+    margin-top: 40vh;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+  .button-center {
+    display: inline-block;
+    background: url(../assets/imgs/icon-flower-button-no-history.png) no-repeat;
+    background-size: cover;
+    width: 8em;
+    height: 8em;
+  }
+  .label-center {
+    color: #989898;
+    font-size: 16px;
+  }
+}
