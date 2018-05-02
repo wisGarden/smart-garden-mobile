@@ -20,6 +20,7 @@ import {PlantIdtTabsPage} from "../pages/plant-idt-tabs/plant-idt-tabs";
 import {PlantIdtAlbumPage} from "../pages/plant-idt-album/plant-idt-album";
 import {PlantIdtPhotoPage} from "../pages/plant-idt-photo/plant-idt-photo";
 import {PlantIdtHistoryPage} from "../pages/plant-idt-history/plant-idt-history";
+import {PlantDetailPage} from "../pages/plant-detail/plant-detail";
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import {PlantIdtHistoryPage} from "../pages/plant-idt-history/plant-idt-history"
         PlantIdtTabsPage,
         PlantIdtAlbumPage,
         PlantIdtPhotoPage,
-        PlantIdtHistoryPage
+        PlantIdtHistoryPage,
+        PlantDetailPage
     ],
     imports: [
         BrowserModule,
@@ -58,7 +60,8 @@ import {PlantIdtHistoryPage} from "../pages/plant-idt-history/plant-idt-history"
         PlantIdtTabsPage,
         PlantIdtAlbumPage,
         PlantIdtPhotoPage,
-        PlantIdtHistoryPage
+        PlantIdtHistoryPage,
+        PlantDetailPage
     ],
     providers: [
         StatusBar,

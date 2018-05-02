@@ -15,7 +15,11 @@ title-bar {
     height: 2px;
     background: rgba(74, 74, 74, 0.09);
   }
-  .black-icon {
+  .normal-icon {
     color: #262626;
+  }
+
+  .normal-icon:active {
+    color: #479DF7;
   }
 }

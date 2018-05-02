@@ -4,20 +4,20 @@
 
         <ion-buttons start (click)="backClick()">
             <button ion-button icon-only>
-                <ion-icon class="black-icon" name="{{startIconName}}"></ion-icon>
+                <ion-icon class="normal-icon" name="{{startIconName}}"></ion-icon>
             </button>
         </ion-buttons>
         <ion-title>{{pageTitle}}</ion-title>
 
         <ion-buttons *ngIf="isSearch !== ('0' && 'false')" end (click)="searchClick()">
             <button ion-button icon-only>
-                <ion-icon name="{{searchIconName}}"></ion-icon>
+                <ion-icon class="normal-icon" name="{{searchIconName}}"></ion-icon>
             </button>
         </ion-buttons>
 
         <ion-buttons end (click)="rightClick()">
             <button ion-button icon-only>
-                <ion-icon name="{{endIconName}}"></ion-icon>
+                <ion-icon class="normal-icon" name="{{endIconName}}"></ion-icon>
             </button>
         </ion-buttons>
 
