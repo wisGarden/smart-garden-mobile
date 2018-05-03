@@ -21,6 +21,8 @@ import {PlantIdtAlbumPage} from "../pages/plant-idt-album/plant-idt-album";
 import {PlantIdtPhotoPage} from "../pages/plant-idt-photo/plant-idt-photo";
 import {PlantIdtHistoryPage} from "../pages/plant-idt-history/plant-idt-history";
 import {PlantDetailPage} from "../pages/plant-detail/plant-detail";
+import {Camera} from "@ionic-native/camera";
+import {AndroidPermissions} from "@ionic-native/android-permissions";
 
 @NgModule({
     declarations: [
@@ -67,6 +69,8 @@ import {PlantDetailPage} from "../pages/plant-detail/plant-detail";
         StatusBar,
         SplashScreen,
         Toast,
+        Camera,
+        AndroidPermissions,
         {provide: ErrorHandler, useClass: IonicErrorHandler}
     ]
 })
