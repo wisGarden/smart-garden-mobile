@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 import {HomePage} from '../home/home';
 import {PlantListPage} from "../plant-list/plant-list";
-import {Platform} from "ionic-angular";
+import {App, Platform} from "ionic-angular";
 import {Toast} from "@ionic-native/toast";
 import {FindPage} from "../find/find";
 import {MinePage} from "../mine/mine";
@@ -19,7 +19,7 @@ export class TabsPage {
     tab2Root = FindPage;
     tab3Root = MinePage;
 
-    constructor(private platform: Platform, private toast: Toast) {
+    constructor(private platform: Platform, private toast: Toast, private app: App) {
 
     }
 
@@ -27,6 +27,22 @@ export class TabsPage {
         this.platform.ready().then(() => {
             this.platform.registerBackButtonAction(() => {
                 this.showExit();
+            });
+        });
+    }
+
+    ionViewDidEnter() {
+        this.platform.ready().then(() => {
+            this.platform.registerBackButtonAction(() => {
+                this.showExit();
+            });
+        });
+    }
+
+    ionViewWillLeave() {
+        this.platform.ready().then(() => {
+            this.platform.registerBackButtonAction(() => {
+                this.app.getRootNav().pop();
             });
         });
     }

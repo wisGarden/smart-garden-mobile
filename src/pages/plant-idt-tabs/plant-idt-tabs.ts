@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage} from 'ionic-angular';
 import {PlantIdtAlbumPage} from "../plant-idt-album/plant-idt-album";
 import {PlantIdtPhotoPage} from "../plant-idt-photo/plant-idt-photo";
 import {PlantIdtHistoryPage} from "../plant-idt-history/plant-idt-history";
@@ -22,7 +22,7 @@ export class PlantIdtTabsPage {
     tab2Root = PlantIdtPhotoPage;
     tab3Root = PlantIdtHistoryPage;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams) {
+    constructor() {
     }
 
     ionViewDidLoad() {

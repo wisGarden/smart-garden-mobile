@@ -1,20 +1,20 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {App, NavController} from 'ionic-angular';
 import {PlantIdtTabsPage} from "../plant-idt-tabs/plant-idt-tabs";
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
-  }
+    constructor(public app: App, public navCtrl: NavController) {
+    }
 
-  ionViewDidLoad() {
-  }
+    ionViewDidLoad() {
+    }
 
-  pushToPlantIdt() {
-      this.navCtrl.push(PlantIdtTabsPage);
-  }
+    pushToPlantIdt() {
+        this.app.getRootNav().push(PlantIdtTabsPage);
+    }
 }

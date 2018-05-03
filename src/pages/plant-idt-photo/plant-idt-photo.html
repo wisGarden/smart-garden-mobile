@@ -1,6 +1,7 @@
+<title-bar pageTitle="植物识别" startIconName="arrow-back" searchIconName="" endIconName="" isSearch="true"></title-bar>
 <ion-content class="margin-top-3 back">
     <div class="child">
-        <span class="button-center"></span>
+        <span class="button-center" (click)="requestWriteFilePermission(openCamera())"></span>
         <ion-label class="label-center">点击按钮打开相机</ion-label>
     </div>
 </ion-content>

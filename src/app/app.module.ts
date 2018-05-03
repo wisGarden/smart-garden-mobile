@@ -23,6 +23,8 @@ import {PlantIdtHistoryPage} from "../pages/plant-idt-history/plant-idt-history"
 import {PlantDetailPage} from "../pages/plant-detail/plant-detail";
 import {Camera} from "@ionic-native/camera";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
+import {GlobalProvider} from '../providers/global/global';
+import {HTTP} from "@ionic-native/http";
 
 @NgModule({
     declarations: [
@@ -71,7 +73,9 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
         Toast,
         Camera,
         AndroidPermissions,
-        {provide: ErrorHandler, useClass: IonicErrorHandler}
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        GlobalProvider,
+        HTTP
     ]
 })
 export class AppModule {

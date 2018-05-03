@@ -1,65 +1,97 @@
-<title-bar pageTitle="草本植物" startIconName="arrow-back" searchIconName="" endIconName="menu" isSearch="true"></title-bar>
+<title-bar pageTitle="{{plantDetail?.result?.familyCn}}" startIconName="arrow-back" searchIconName="" endIconName="menu"
+           isSearch="true"></title-bar>
 
 <ion-content class="margin-top-3">
     <div style="text-align: center">
-        <div class="blur pic-bakcground"></div>
-        <img class="pic" src="assets/imgs/1.png">
-        <button class="label-title">虹之玉</button>
+        <img class="blur pic-background" src="{{plantDetail?.result?.images[0]}}" *ngIf="plantDetail?.result?.images[0] != null">
+        <img class="pic" src="{{plantDetail?.result?.images[0]}}" *ngIf="plantDetail?.result?.images[0] != null">
+        <button class="label-title">{{plantDetail?.result?.nameStd}}</button>
     </div>
     <div class="padding-vertical">
-        <p class="top-description">
-            景天科景天属的多肉植物，多年生肉质草本植物,景天科景天属的多肉植物，多年生肉质草本植物,景天科景天属的多肉植物，多年生肉质草本植物</p>
+        <p class="top-description">{{plantDetail?.result?.description}}</p>
         <table class="table">
-            <tr>
-                <th>英文名:</th>
-                <th>无</th>
+            <tr *ngIf="plantDetail?.result?.alias != ''">
+                <th><b>别名:</b></th>
+                <th>{{plantDetail?.result?.alias}}</th>
+            </tr>
+            <tr *ngIf="plantDetail?.result?.nameLt != ''">
+                <th><b>拉丁文名:</b></th>
+                <th>{{plantDetail?.result?.nameLt}}</th>
             </tr>
             <tr>
-                <th>科属:</th>
-                <th>植物界 木贼门 木贼亚门 木兰纲蔷薇亚纲 虎耳草目 景天科 长生草亚科 景天族 景天属</th>
+                <th><b>科属:</b></th>
+                <th>{{plantDetail?.result?.familyCn}}&nbsp;{{plantDetail?.result?.genusCn}}</th>
             </tr>
         </table>
-        <p>描述：</p>
-        <p>株高10-20厘米，多分枝。肉质叶膨大互生，圆筒形至卵形，长2厘米，绿色，表皮光亮、无白粉，在阳光充足的条件下转为红褐色，小花淡黄红色。</p>
+        <div *ngIf="plantDetail?.result?.info?.xgsc != ''">
+            <p><b>相关诗词：</b></p>
+            <p>{{plantDetail?.result?.info?.xgsc}}</p>
+        </div>
+        <div *ngIf="plantDetail?.result?.info?.jzgy != ''">
+            <p><b>价值功用：</b></p>
+            <p>{{plantDetail?.result?.info?.jzgy}}</p>
+        </div>
+        <div *ngIf="plantDetail?.result?.info?.fbdq != ''">
+            <p><b>分布地区：</b></p>
+            <p>{{plantDetail?.result?.info?.fbdq}}</p>
+        </div>
+        <div *ngIf="plantDetail?.result?.info?.yhjs != ''">
+            <p><b>养护技术：</b></p>
+            <p>{{plantDetail?.result?.info?.yhjs}}</p>
+        </div>
+        <div *ngIf="plantDetail?.result?.info?.bxtz != ''">
+            <p><b>表型特征：</b></p>
+            <p>{{plantDetail?.result?.info?.bxtz}}</p>
+        </div>
+        <div *ngIf="plantDetail?.result?.info?.hksj != ''">
+            <p><b>花开时节：</b></p>
+            <p>{{plantDetail?.result?.info?.hksj}}</p>
+        </div>
+
         <div class="subtitle-line"></div>
-        <p class="subtitle"><span>相 关 推 荐</span></p>
+        <p class="subtitle"><span><b>相 关 推 荐</b></span></p>
 
         <ion-grid class="grid">
-            <ion-row>
-                <ion-col>
-                    <img src="assets/imgs/1.png">
-                    <label>三日月美人</label>
-                </ion-col>
-                <ion-col>
-                    <img src="assets/imgs/1.png">
-                    <label>阿吉塔玫瑰</label>
-                </ion-col>
-                <ion-col>
-                    <img src="assets/imgs/1.png">
-                    <label>乙女心</label>
+            <!--<ion-row>-->
+                <!--<ion-col>-->
+                    <!--<img src="assets/imgs/1.png">-->
+                    <!--<label>三日月美人</label>-->
+                <!--</ion-col>-->
+                <!--<ion-col>-->
+                    <!--<img src="assets/imgs/1.png">-->
+                    <!--<label>阿吉塔玫瑰</label>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+            <ion-row justify-content-start>
+                <ion-col col-4 *ngFor="let item of data?.result;let i = index">
+                    <img src="{{item?.imageUrl}}" (click)="jumpToOtherPlant(i)" *ngIf="item?.name != plantDetail?.result?.nameStd; else elseBlock;">
+                    <ng-template #elseBlock>
+                        <img src="{{item?.imageUrl}}">
+                    </ng-template>
+                    <label>{{item?.name}}</label>
                 </ion-col>
             </ion-row>
         </ion-grid>
 
         <div class="subtitle-line"></div>
-        <p class="subtitle"><span>供 应 商 家</span></p>
+        <p class="subtitle"><span><b>供 应 商 家</b></span></p>
 
-        <ion-grid class="grid">
-            <ion-row>
-                <ion-col>
-                    <img src="assets/imgs/1.png">
-                    <label>三日月美人</label>
-                </ion-col>
-                <ion-col>
-                    <img src="assets/imgs/1.png">
-                    <label>阿吉塔玫瑰</label>
-                </ion-col>
-                <ion-col>
-                    <img src="assets/imgs/1.png">
-                    <label>乙女心</label>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+        <!--<ion-grid class="grid">-->
+            <!--<ion-row>-->
+                <!--<ion-col>-->
+                    <!--<img src="assets/imgs/1.png">-->
+                    <!--<label>三日月美人</label>-->
+                <!--</ion-col>-->
+                <!--<ion-col>-->
+                    <!--<img src="assets/imgs/1.png">-->
+                    <!--<label>阿吉塔玫瑰</label>-->
+                <!--</ion-col>-->
+                <!--<ion-col>-->
+                    <!--<img src="assets/imgs/1.png">-->
+                    <!--<label>乙女心</label>-->
+                <!--</ion-col>-->
+            <!--</ion-row>-->
+        <!--</ion-grid>-->
 
         <div class="no-supplier">
             <img src="assets/imgs/icon-sad.png">

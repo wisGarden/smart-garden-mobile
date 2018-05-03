@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NavController} from "ionic-angular";
+import {App, NavController, Platform} from "ionic-angular";
 
 /**
  * Generated class for the TitleBarComponent component.
@@ -18,7 +18,7 @@ export class TitleBarComponent {
     @Input() endIconName: string;
     @Input() isSearch: string;
 
-    constructor(public navCtrl: NavController) {
+    constructor(public app:App, public navCtrl: NavController, private platform: Platform) {
         this.pageTitle = '植物大全';
         this.startIconName = 'close';
         this.searchIconName = 'search';
@@ -27,7 +27,7 @@ export class TitleBarComponent {
 
     backClick() {
         if (this.startIconName == "arrow-back") {
-            this.navCtrl.pop();
+            this.app.getRootNav().pop();
         }
     }
 
