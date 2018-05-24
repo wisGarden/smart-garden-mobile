@@ -26,6 +26,7 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {GlobalProvider} from '../providers/global/global';
 import {HTTP} from "@ionic-native/http";
 import {DiseaseSearchPage} from "../pages/disease-search/disease-search";
+import {InsectSearchPage} from "../pages/insect-search/insect-search";
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import {DiseaseSearchPage} from "../pages/disease-search/disease-search";
         PlantIdtPhotoPage,
         PlantIdtHistoryPage,
         PlantDetailPage,
-        DiseaseSearchPage
+        DiseaseSearchPage,
+        InsectSearchPage
     ],
     imports: [
         BrowserModule,
@@ -68,7 +70,8 @@ import {DiseaseSearchPage} from "../pages/disease-search/disease-search";
         PlantIdtPhotoPage,
         PlantIdtHistoryPage,
         PlantDetailPage,
-        DiseaseSearchPage
+        DiseaseSearchPage,
+        InsectSearchPage
     ],
     providers: [
         StatusBar,
