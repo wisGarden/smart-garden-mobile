@@ -37,7 +37,8 @@ export class PlantIdtPhotoPage {
         this.app.getRootNav().push(PlantDetailPage,
             {
                 data: this.data,
-                imageData: this.imageData
+                imageData: this.imageData,
+                index: 0
             });
     }
 
@@ -54,8 +55,8 @@ export class PlantIdtPhotoPage {
             allowEdit: true,
             correctOrientation: true,
             sourceType: this.camera.PictureSourceType.CAMERA,         //是打开相机拍照还是打开相册选择  PHOTOLIBRARY : 相册选择, CAMERA : 拍照,
-            targetWidth: 200,                                        //照片宽度
-            targetHeight: 200,                                       //照片高度
+            targetWidth: 500,                                        //照片宽度
+            targetHeight: 500,                                       //照片高度
         };
 
         this.camera.getPicture(options).then((imageData) => {

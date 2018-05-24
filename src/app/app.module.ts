@@ -25,6 +25,7 @@ import {Camera} from "@ionic-native/camera";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {GlobalProvider} from '../providers/global/global';
 import {HTTP} from "@ionic-native/http";
+import {DiseaseSearchPage} from "../pages/disease-search/disease-search";
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import {HTTP} from "@ionic-native/http";
         PlantIdtAlbumPage,
         PlantIdtPhotoPage,
         PlantIdtHistoryPage,
-        PlantDetailPage
+        PlantDetailPage,
+        DiseaseSearchPage
     ],
     imports: [
         BrowserModule,
@@ -65,7 +67,8 @@ import {HTTP} from "@ionic-native/http";
         PlantIdtAlbumPage,
         PlantIdtPhotoPage,
         PlantIdtHistoryPage,
-        PlantDetailPage
+        PlantDetailPage,
+        DiseaseSearchPage
     ],
     providers: [
         StatusBar,

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {App, NavController} from 'ionic-angular';
 import {PlantIdtTabsPage} from "../plant-idt-tabs/plant-idt-tabs";
+import {DiseaseSearchPage} from "../disease-search/disease-search";
 
 @Component({
     selector: 'page-home',
@@ -16,5 +17,9 @@ export class HomePage {
 
     pushToPlantIdt() {
         this.app.getRootNav().push(PlantIdtTabsPage);
+    }
+
+    pushToDiseaseSearch() {
+        this.app.getRootNav().push(DiseaseSearchPage);
     }
 }

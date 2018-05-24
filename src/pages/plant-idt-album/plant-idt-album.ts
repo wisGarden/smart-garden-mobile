@@ -55,8 +55,8 @@ export class PlantIdtAlbumPage {
             allowEdit: true,
             correctOrientation: true,
             sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,         //是打开相机拍照还是打开相册选择  PHOTOLIBRARY : 相册选择, CAMERA : 拍照,
-            targetWidth: 200,                                        //照片宽度
-            targetHeight: 200,                                       //照片高度
+            targetWidth: 500,                                        //照片宽度
+            targetHeight: 500,                                       //照片高度
         };
 
         this.camera.getPicture(options).then((imageData) => {
