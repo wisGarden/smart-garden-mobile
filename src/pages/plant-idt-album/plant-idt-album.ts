@@ -72,11 +72,6 @@ export class PlantIdtAlbumPage {
                 this.jumpToList();
             }).catch(error => {
                 this.dismissLoading();
-                if (error.error.contains("timed out")) {
-                    this.toast.showShortCenter("网络请求失败").subscribe();
-                } else {
-                    alert(error.error);
-                }
             });
         }, (err) => {
             console.log('打开相机失败');

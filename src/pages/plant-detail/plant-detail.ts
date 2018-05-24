@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {App, Content, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {App, Content, IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {Toast} from "@ionic-native/toast";
 
@@ -16,7 +16,7 @@ import {Toast} from "@ionic-native/toast";
     templateUrl: 'plant-detail.html',
 })
 export class PlantDetailPage {
-
+    private loading: Loading;
     data: Object;
     index: 0;
     imageData: string;
@@ -26,26 +26,19 @@ export class PlantDetailPage {
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private network: GlobalProvider, private toast: Toast,
-                private app: App) {
+                private app: App, private loadingCtl: LoadingController) {
         this.imageData = this.navParams.data.imageData;
 
         this.index = this.navParams.data.index;
 
         this.data = this.navParams.data.data;
 
-        if (this.data.hasOwnProperty("result") && this.data['result'].length > 0) {
-            if (this.data['result'][this.index].hasOwnProperty("infoUrl")) {
-                this.network.getPlant(this.data['result'][this.index]['infoUrl']).then(data => {
+        if (this.data.hasOwnProperty("data") && this.data['data'].length > 0) {
+            if (this.data['data'][this.index].hasOwnProperty("infoUrl")) {
+                this.network.getPlant(this.data['data'][this.index]['infoUrl']).then(data => {
                     this.plantDetail = JSON.parse(data.data);
-                }).catch(error => {
-                    if (error.error.contains("timed out")) {
-                        this.toast.showShortCenter("网络请求失败").subscribe();
-                    } else {
-                        alert(error.error);
-                    }
                 });
             }
-
         } else {
             this.toast.showShortCenter("没有相关植物信息").subscribe();
         }
@@ -56,23 +49,34 @@ export class PlantDetailPage {
     }
 
     jumpToOtherPlant(i) {
-        if (this.data.hasOwnProperty("result") && this.data['result'].length > 0) {
-            if (this.data['result'][i].hasOwnProperty("infoUrl")) {
-                this.network.getPlant(this.data['result'][i]['infoUrl']).then(data => {
+        this.presentLoading();
+        if (this.data.hasOwnProperty("data") && this.data['data'].length > 0) {
+            if (this.data['data'][i].hasOwnProperty("infoUrl")) {
+                this.network.getPlant(this.data['data'][i]['infoUrl']).then(data => {
+                    this.dismissLoading();
                     this.plantDetail = JSON.parse(data.data);
                 }).catch(error => {
-                    if (error.error.contains("timed out")) {
-                        this.toast.showShortCenter("网络请求失败").subscribe();
-                    } else {
-                        alert(error.error);
-                    }
+                    this.dismissLoading();
                 });
             }
-
         } else {
             this.toast.showShortCenter("没有相关植物信息").subscribe();
         }
         this.content.scrollTo(0, 0, 300);
     }
 
+    presentLoading() {
+        let loading = this.loadingCtl.create({
+            content: ""
+        });
+        loading.present();
+        this.loading = loading;
+    }
+
+    dismissLoading() {
+        if (this.loading != null) {
+            this.loading.dismiss();
+            this.loading = null;
+        }
+    }
 }

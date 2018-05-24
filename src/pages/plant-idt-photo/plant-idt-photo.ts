@@ -51,7 +51,7 @@ export class PlantIdtPhotoPage {
             destinationType: this.camera.DestinationType.DATA_URL,        //DATA_URL 是 base64   FILE_URL 是文件路径
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
-            saveToPhotoAlbum: false,                                       //是否保存到相册
+            saveToPhotoAlbum: true,                                       //是否保存到相册
             allowEdit: true,
             correctOrientation: true,
             sourceType: this.camera.PictureSourceType.CAMERA,         //是打开相机拍照还是打开相册选择  PHOTOLIBRARY : 相册选择, CAMERA : 拍照,
@@ -72,11 +72,6 @@ export class PlantIdtPhotoPage {
                 this.jumpToList();
             }).catch(error => {
                 this.dismissLoading();
-                if (error.error.contains("timed out")) {
-                    this.toast.showShortCenter("网络请求失败").subscribe();
-                } else {
-                    alert(error.error);
-                }
             });
         }, (err) => {
             console.log('打开相机失败');

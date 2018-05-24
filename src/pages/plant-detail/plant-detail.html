@@ -1,51 +1,51 @@
-<title-bar pageTitle="{{plantDetail?.result?.familyCn}}" startIconName="arrow-back" searchIconName="" endIconName="menu"
+<title-bar pageTitle="{{plantDetail?.data?.familyCn}}" startIconName="arrow-back" searchIconName="" endIconName="menu"
            isSearch="true"></title-bar>
 
 <ion-content class="margin-top-3">
     <div style="text-align: center">
-        <img class="blur pic-background" src="{{plantDetail?.result?.images[0]}}" *ngIf="plantDetail?.result?.images[0] != null">
-        <img class="pic" src="{{plantDetail?.result?.images[0]}}" *ngIf="plantDetail?.result?.images[0] != null">
-        <button class="label-title">{{plantDetail?.result?.nameStd}}</button>
+        <img class="blur pic-background" src="{{plantDetail?.data?.images[0]}}" *ngIf="plantDetail?.data?.images[0] != null">
+        <img class="pic" src="{{plantDetail?.data?.images[0]}}" *ngIf="plantDetail?.data?.images[0] != null">
+        <button class="label-title">{{plantDetail?.data?.nameStd}}</button>
     </div>
     <div class="padding-vertical">
-        <p class="top-description">{{plantDetail?.result?.description}}</p>
+        <p class="top-description">{{plantDetail?.data?.description}}</p>
         <table class="table">
-            <tr *ngIf="plantDetail?.result?.alias != ''">
+            <tr *ngIf="plantDetail?.data?.alias != ''">
                 <th><b>别名:</b></th>
-                <th>{{plantDetail?.result?.alias}}</th>
+                <th>{{plantDetail?.data?.alias}}</th>
             </tr>
-            <tr *ngIf="plantDetail?.result?.nameLt != ''">
+            <tr *ngIf="plantDetail?.data?.nameLt != ''">
                 <th><b>拉丁文名:</b></th>
-                <th>{{plantDetail?.result?.nameLt}}</th>
+                <th>{{plantDetail?.data?.nameLt}}</th>
             </tr>
             <tr>
                 <th><b>科属:</b></th>
-                <th>{{plantDetail?.result?.familyCn}}&nbsp;{{plantDetail?.result?.genusCn}}</th>
+                <th>{{plantDetail?.data?.familyCn}}&nbsp;{{plantDetail?.data?.genusCn}}</th>
             </tr>
         </table>
-        <div *ngIf="plantDetail?.result?.info?.xgsc != ''">
+        <div *ngIf="plantDetail?.data?.info?.xgsc != ''">
             <p><b>相关诗词：</b></p>
-            <p>{{plantDetail?.result?.info?.xgsc}}</p>
+            <p>{{plantDetail?.data?.info?.xgsc}}</p>
         </div>
-        <div *ngIf="plantDetail?.result?.info?.jzgy != ''">
+        <div *ngIf="plantDetail?.data?.info?.jzgy != ''">
             <p><b>价值功用：</b></p>
-            <p>{{plantDetail?.result?.info?.jzgy}}</p>
+            <p>{{plantDetail?.data?.info?.jzgy}}</p>
         </div>
-        <div *ngIf="plantDetail?.result?.info?.fbdq != ''">
+        <div *ngIf="plantDetail?.data?.info?.fbdq != ''">
             <p><b>分布地区：</b></p>
-            <p>{{plantDetail?.result?.info?.fbdq}}</p>
+            <p>{{plantDetail?.data?.info?.fbdq}}</p>
         </div>
-        <div *ngIf="plantDetail?.result?.info?.yhjs != ''">
+        <div *ngIf="plantDetail?.data?.info?.yhjs != ''">
             <p><b>养护技术：</b></p>
-            <p>{{plantDetail?.result?.info?.yhjs}}</p>
+            <p>{{plantDetail?.data?.info?.yhjs}}</p>
         </div>
-        <div *ngIf="plantDetail?.result?.info?.bxtz != ''">
+        <div *ngIf="plantDetail?.data?.info?.bxtz != ''">
             <p><b>表型特征：</b></p>
-            <p>{{plantDetail?.result?.info?.bxtz}}</p>
+            <p>{{plantDetail?.data?.info?.bxtz}}</p>
         </div>
-        <div *ngIf="plantDetail?.result?.info?.hksj != ''">
+        <div *ngIf="plantDetail?.data?.info?.hksj != ''">
             <p><b>花开时节：</b></p>
-            <p>{{plantDetail?.result?.info?.hksj}}</p>
+            <p>{{plantDetail?.data?.info?.hksj}}</p>
         </div>
 
         <div class="history-title-line"></div>
@@ -63,8 +63,8 @@
                 <!--</ion-col>-->
             <!--</ion-row>-->
             <ion-row justify-content-start>
-                <ion-col col-4 *ngFor="let item of data?.result;let i = index">
-                    <img src="{{item?.imageUrl}}" (click)="jumpToOtherPlant(i)" *ngIf="item?.name != plantDetail?.result?.nameStd; else elseBlock;">
+                <ion-col col-4 *ngFor="let item of data?.data;let i = index">
+                    <img src="{{item?.imageUrl}}" (click)="jumpToOtherPlant(i)" *ngIf="item?.name != plantDetail?.data?.nameStd; else elseBlock;">
                     <ng-template #elseBlock>
                         <img src="{{item?.imageUrl}}">
                     </ng-template>
