@@ -1,0 +1,19 @@
+<title-bar pageTitle="病害查询" startIconName="arrow-back" searchIconName="" endIconName="" isSearch="true"></title-bar>
+
+<ion-content class="margin-top-3">
+    <div style="position: relative;margin-top: 6px">
+        <ion-searchbar (ionInput)="getItems($event)" placeholder="请输入..." style="display: inline-block;position: relative;padding-left: 14px"></ion-searchbar>
+        <div>
+            <ion-select [(ngModel)]="option" interface="popover">
+                <ion-option value="plant">植物</ion-option>
+                <ion-option value="disease">病害</ion-option>
+            </ion-select>
+        </div>
+    </div>
+    <div class="history-title-line"></div>
+    <p class="history-title"><span>搜索历史</span></p>
+    <div class="history">
+        <span>白斑病</span>
+        <span>玉米</span>
+    </div>
+</ion-content>
