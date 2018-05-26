@@ -1,7 +1,4 @@
 page-plant-list {
-  .content {
-    padding-top: 40px;
-  }
   .card-ios {
     box-shadow: none;
   }
@@ -9,16 +6,14 @@ page-plant-list {
     font-size: 0.8em;
     color: #989898;
   }
-  //.left-plant {
-  //  margin-right: -4px;
-  //}
-  //.right-plant {
-  //
-  //}
+  .plant {
+    margin-left: 1px;
+    margin-right: -5px;
+  }
   //.card-ios {
   //  border: 2px solid red;
   //}
-  //.col {
-  //  padding: 0 !important;
-  //}
+  .col {
+    padding: 0 !important;
+  }
 }

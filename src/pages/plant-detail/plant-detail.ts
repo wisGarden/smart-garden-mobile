@@ -19,15 +19,14 @@ export class PlantDetailPage {
     private loading: Loading;
     data: Object;
     index: 0;
-    imageData: string;
     plantDetail: Object;
+    showLoading: boolean = true;
 
     @ViewChild(Content) content: Content;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private network: GlobalProvider, private toast: Toast,
                 private app: App, private loadingCtl: LoadingController) {
-        this.imageData = this.navParams.data.imageData;
 
         this.index = this.navParams.data.index;
 
@@ -37,6 +36,10 @@ export class PlantDetailPage {
             if (this.data['data'][this.index].hasOwnProperty("infoUrl")) {
                 this.network.getPlant(this.data['data'][this.index]['infoUrl']).then(data => {
                     this.plantDetail = JSON.parse(data.data);
+                    if (this.showLoading) {
+                        this.dismissLoading();
+                        this.showLoading = false;
+                    }
                 });
             }
         } else {
@@ -46,6 +49,12 @@ export class PlantDetailPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad PlantDetailPage');
+    }
+
+    ionViewDidEnter() {
+        if (this.showLoading) {
+            this.presentLoading();
+        }
     }
 
     jumpToOtherPlant(i) {

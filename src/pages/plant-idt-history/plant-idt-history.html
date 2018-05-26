@@ -1,6 +1,25 @@
-<title-bar pageTitle="植物识别" startIconName="arrow-back" searchIconName="" endIconName="" isSearch="true"></title-bar>
+<title-bar pageTitle="识别历史" startIconName="arrow-back" searchIconName="" endIconName="" isSearch="true"></title-bar>
 <ion-content class="margin-top-3 back">
-    <div class="child">
+    <ng-template #template>
+        <ion-grid>
+            <ion-row>
+                <ion-col class="plant" col-6 *ngFor="let plant of plantList">
+                    <ion-card (click)="jumpToDetail(plant)">
+                        <img src="{{plant?.image}}"/>
+                        <p class="card-title">{{plant?.data[0]?.name}}</p>
+                        <p class="card-subtitle">{{plant?.data[0]?.family}}{{plant?.data[0]?.genus}}</p>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">-->
+            <!--<ion-infinite-scroll-content-->
+                    <!--loadingSpinner="bubbles"-->
+                    <!--loadingText="Loading more data...">-->
+            <!--</ion-infinite-scroll-content>-->
+        <!--</ion-infinite-scroll>-->
+    </ng-template>
+    <div class="child" *ngIf="notShowList;else template">
         <span class="button-center"></span>
         <ion-label class="label-center">暂无历史记录</ion-label>
     </div>

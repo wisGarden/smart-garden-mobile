@@ -5,6 +5,7 @@ import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {GlobalProvider} from "../../providers/global/global";
 import {Toast} from "@ionic-native/toast";
 import {PlantDetailPage} from "../plant-detail/plant-detail";
+import {Storage} from "@ionic/storage";
 
 /**
  * Generated class for the PlantIdtPhotoPage page.
@@ -26,18 +27,18 @@ export class PlantIdtPhotoPage {
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private camera: Camera, private permissions: AndroidPermissions,
                 private loadingCtl: LoadingController, private network: GlobalProvider,
-                private toast: Toast, public app: App) {
+                private toast: Toast, public app: App,
+                private storage: Storage) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad PlantIdtPhotoPage');
     }
 
-    jumpToList() {
+    jumpToDetail() {
         this.app.getRootNav().push(PlantDetailPage,
             {
                 data: this.data,
-                imageData: this.imageData,
                 index: 0
             });
     }
@@ -68,8 +69,19 @@ export class PlantIdtPhotoPage {
             this.imageData = 'data:image/jpeg;base64,' + imageData;
             this.network.getPlantList(imageData).then(data => {
                 this.data = JSON.parse(data.data);
+
+                // 数据缓存，用于历史记录
+                this.data['image'] = this.imageData;
+                let arr: any[] = [];
+                arr[0] = this.data;
+                this.storage.get("data").then(data => {
+                    if (data != null) {
+                        arr = arr.concat(data);
+                    }
+                    this.storage.set("data", arr);
+                });
                 this.dismissLoading();
-                this.jumpToList();
+                this.jumpToDetail();
             }).catch(error => {
                 this.dismissLoading();
             });

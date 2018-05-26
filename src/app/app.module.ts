@@ -27,6 +27,7 @@ import {GlobalProvider} from '../providers/global/global';
 import {HTTP} from "@ionic-native/http";
 import {DiseaseSearchPage} from "../pages/disease-search/disease-search";
 import {InsectSearchPage} from "../pages/insect-search/insect-search";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
     declarations: [
@@ -53,7 +54,8 @@ import {InsectSearchPage} from "../pages/insect-search/insect-search";
             tabsHideOnSubPages: true,
             iconMode: 'ios',//  在整个应用程序中为所有图标使用的模式。可用选项："ios"，"md"
             mode: 'ios'//在整个应用程序中使用的模式。
-        })
+        }),
+        IonicStorageModule.forRoot()
     ],
     bootstrap: [IonicApp],
     entryComponents: [
