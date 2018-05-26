@@ -1,0 +1,63 @@
+page-disease-detail {
+  .img {
+    width: 100%;
+    height: 243px;
+  }
+  .p1 {
+    text-align: center;
+    padding: 25px 40px 25px 50px;
+    font-size: 17px;
+    border-radius: 50px;
+    width: 50%;
+    height: 30px;
+    margin-left: 25%;
+    box-shadow: 0 1px 10px #479DF7;
+    border: 0 solid #479DF7;
+    background-color: #FFFFFF;
+    margin-top: -30px;
+    overflow: hidden;
+    position: absolute;
+    font-weight: bold;
+    color: #479DF7;
+    letter-spacing: 5px;
+  }
+  .title1 {
+    color: #479DF7;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin: -12px 0 15px 0;
+  }
+  .title1 span {
+    background: #FFFFFF;
+  }
+  .p2 {
+    margin: 35px 15px 15px 15px;
+    color: #7A7A7D;
+    font-size: 10px;
+    letter-spacing: 3px;
+    line-height: 20px;
+  }
+  .p4 {
+    margin: 0 15px 25px 15px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: #000000;
+    line-height: 25px;
+  }
+  .p3 {
+    position: absolute;
+    border-radius: 15px;
+    padding-top: 12.5px;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .div-line {
+    height: 1px;
+    background-color: #EEEEEE;
+    margin: 0 15px;
+  }
+}

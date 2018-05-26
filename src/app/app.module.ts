@@ -29,6 +29,7 @@ import {DiseaseSearchPage} from "../pages/disease-search/disease-search";
 import {InsectSearchPage} from "../pages/insect-search/insect-search";
 import {IonicStorageModule} from "@ionic/storage";
 import {SQLite} from "@ionic-native/sqlite";
+import {DiseaseDetailPage} from "../pages/disease-detail/disease-detail";
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import {SQLite} from "@ionic-native/sqlite";
         PlantIdtHistoryPage,
         PlantDetailPage,
         DiseaseSearchPage,
-        InsectSearchPage
+        InsectSearchPage,
+        DiseaseDetailPage
     ],
     imports: [
         BrowserModule,
@@ -74,7 +76,8 @@ import {SQLite} from "@ionic-native/sqlite";
         PlantIdtHistoryPage,
         PlantDetailPage,
         DiseaseSearchPage,
-        InsectSearchPage
+        InsectSearchPage,
+        DiseaseDetailPage
     ],
     providers: [
         StatusBar,
