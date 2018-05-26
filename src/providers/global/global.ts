@@ -19,9 +19,9 @@ export class GlobalProvider {
      */
     getPlantList(img): Promise<HTTPResponse> {
         let response : Promise<HTTPResponse> = this.http.post(BASEURL + PLANT_LIST, {img: img}, {});
-        // response.catch(error => {
-        //     this.error(error);
-        // });
+        response.catch(error => {
+            this.error(error);
+        });
         return response;
     }
 
@@ -30,9 +30,9 @@ export class GlobalProvider {
      */
     getPlant(infoUrl): Promise<HTTPResponse> {
         let response : Promise<HTTPResponse> = this.http.get(BASEURL + PLANT, {code: infoUrl}, {});
-        // response.catch(error => {
-        //     this.error(error);
-        // });
+        response.catch(error => {
+            this.error(error);
+        });
         return response;
     }
 
