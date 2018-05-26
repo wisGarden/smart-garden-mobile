@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HTTP, HTTPResponse} from "@ionic-native/http";
 import {Toast} from "@ionic-native/toast";
 
-const BASEURL = "http://192.168.43.84:8080/";
+const BASEURL = "http://192.168.199.120:8080/";
 const PLANT = "getPlant";
 const PLANT_LIST = "getPlantList";
 

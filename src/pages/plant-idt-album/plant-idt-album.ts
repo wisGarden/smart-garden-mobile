@@ -5,6 +5,7 @@ import {Toast} from "@ionic-native/toast";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {GlobalProvider} from "../../providers/global/global";
+import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 
 /**
  * Generated class for the PlantIdtAlbumPage page.
@@ -26,14 +27,14 @@ export class PlantIdtAlbumPage {
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private camera: Camera, private permissions: AndroidPermissions,
                 private loadingCtl: LoadingController, private network: GlobalProvider,
-                private toast: Toast, public app: App) {
+                public app: App, private sqlite: SQLite) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad PlantIdtPhotoPage');
     }
 
-    jumpToList() {
+    jumpToDetail() {
         this.app.getRootNav().push(PlantDetailPage,
             {
                 data: this.data,
@@ -68,13 +69,19 @@ export class PlantIdtAlbumPage {
             this.imageData = 'data:image/jpeg;base64,' + imageData;
             this.network.getPlantList(imageData).then(data => {
                 this.data = JSON.parse(data.data);
+
+                // 数据缓存，用于历史记录
+                this.data['image'] = this.imageData;
+                this.saveData();
+
                 this.dismissLoading();
-                this.jumpToList();
+                this.jumpToDetail();
             }).catch(error => {
+                console.log("network error: " + error);
                 this.dismissLoading();
             });
         }, (err) => {
-            console.log('打开相机失败');
+            console.log('打开相机失败: ' + err);
         });
     }
 
@@ -116,5 +123,20 @@ export class PlantIdtAlbumPage {
             this.loading.dismiss();
             this.loading = null;
         }
+    }
+
+    saveData() {
+        this.sqlite.create({
+            name: 'ionicdb.db',
+            location: 'default'
+        }).then((db: SQLiteObject) => {
+            db.executeSql('CREATE TABLE IF NOT EXISTS identification(id INTEGER PRIMARY KEY, data TEXT)', {})
+                .then(res => console.log('Executed SQL'))
+                .catch(e => console.log(e));
+            db.executeSql('INSERT INTO identification VALUES(NULL, ?)',
+                [JSON.stringify(this.data)])
+                .then(res => console.log(res))
+                .catch(e => console.log(e));
+        }).catch(e => console.log(e));
     }
 }

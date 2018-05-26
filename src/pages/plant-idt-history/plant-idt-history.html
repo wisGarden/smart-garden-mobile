@@ -1,23 +1,31 @@
 <title-bar pageTitle="识别历史" startIconName="arrow-back" searchIconName="" endIconName="" isSearch="true"></title-bar>
 <ion-content class="margin-top-3 back">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles">
+        </ion-refresher-content>
+    </ion-refresher>
     <ng-template #template>
-        <ion-grid>
-            <ion-row>
-                <ion-col class="plant" col-6 *ngFor="let plant of plantList">
-                    <ion-card (click)="jumpToDetail(plant)">
-                        <img src="{{plant?.image}}"/>
-                        <p class="card-title">{{plant?.data[0]?.name}}</p>
-                        <p class="card-subtitle">{{plant?.data[0]?.family}}{{plant?.data[0]?.genus}}</p>
-                    </ion-card>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">-->
-            <!--<ion-infinite-scroll-content-->
-                    <!--loadingSpinner="bubbles"-->
-                    <!--loadingText="Loading more data...">-->
-            <!--</ion-infinite-scroll-content>-->
-        <!--</ion-infinite-scroll>-->
+        <ion-list>
+            <ion-grid>
+                <ion-row>
+                    <ion-col class="plant" col-6 *ngFor="let plant of plantList">
+                        <ion-card (click)="jumpToDetail(plant)">
+                            <img src="{{plant?.image}}"/>
+                            <p class="card-title">{{plant?.data[0]?.name}}</p>
+                            <p class="card-subtitle">{{plant?.data[0]?.family}}{{plant?.data[0]?.genus}}</p>
+                        </ion-card>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+            <ion-infinite-scroll-content
+                    loadingSpinner="bubbles">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
     </ng-template>
     <div class="child" *ngIf="notShowList;else template">
         <span class="button-center"></span>

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {Storage} from "@ionic/storage";
+import {App, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {PlantDetailPage} from "../plant-detail/plant-detail";
+import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 
 /**
  * Generated class for the PlantIdtHistoryPage page.
@@ -16,15 +16,14 @@ import {PlantDetailPage} from "../plant-detail/plant-detail";
     templateUrl: 'plant-idt-history.html',
 })
 export class PlantIdtHistoryPage {
-    private loading: Loading;
+    private infiniteScroll = null;
     notShowList: boolean = true;
-    plantList: any;
-    private page: number = 1;
-    private currentPage: number = 1;
+    plantList: any = [];
+    private currentPage: number = 0;
+    private ITEM_NUM = 10;
 
     constructor(public navCtrl: NavController, public navParams: NavParams,
-                public storage: Storage, private loadingCtl: LoadingController,
-                public app: App) {
+                public app: App, private sqlite: SQLite) {
     }
 
     jumpToDetail(plant) {
@@ -37,59 +36,77 @@ export class PlantIdtHistoryPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad PlantIdtHistoryPage');
+        this.loadData(true);
     }
 
     ionViewDidEnter() {
-        // this.storage.get("page").then(page => {
-        //     if (page == null) {
-        //         this.notShowList = true;
-        //     } else {
-        //         this.page = page;
-        //     }
-        //     console.log("aa page: "+ this.page + " currentPage: " + this.currentPage);
-        // });
 
-        this.storage.get("data").then(value => {
-            this.notShowList = value == null;
-            if (value != null) {
-                console.log(JSON.stringify(value));
-                this.plantList = value;
+    }
+
+    doRefresh(refresher) {
+        this.currentPage = 0;
+        if (this.infiniteScroll != null) {
+            this.infiniteScroll.enable(true);
+        }
+        this.loadData(true);
+        setTimeout(() => {
+            refresher.complete();
+        }, 2000);
+    }
+
+    doInfinite(infiniteScroll) {
+        this.infiniteScroll = infiniteScroll;
+        this.loadData(false);
+
+    }
+
+    loadData(isFirstTime) {
+        if (isFirstTime) {
+            this.currentPage = 0;
+            if (this.infiniteScroll != null) {
+                this.infiniteScroll.enable(true);
+            }
+        }
+        this.sqlite.create({
+            name: 'ionicdb.db',
+            location: 'default'
+        }).then((db: SQLiteObject) => {
+            db.executeSql('CREATE TABLE IF NOT EXISTS identification(id INTEGER PRIMARY KEY, data TEXT)', {})
+                .then(res => console.log('Executed SQL'))
+                .catch(e => console.log(e));
+            db.executeSql('SELECT * FROM identification ORDER BY id DESC limit ? offset ?', [this.ITEM_NUM, this.currentPage++ * this.ITEM_NUM])
+                .then(res => {
+                    if (isFirstTime) {
+                        this.plantList = [];
+                        this.notShowList = res.rows.length == 0;
+                    }
+                    if (res.rows.length == 0 && this.infiniteScroll != null) {
+                        this.infiniteScroll.enable(false);
+                        return;
+                    }
+                    let temp: string = '';
+                    for (let i = 0; i < res.rows.length; i++) {
+                        this.plantList.push(JSON.parse(res.rows.item(i).data));
+                        temp += res.rows.item(i).id + " ";
+                    }
+                    console.log("id: " + temp + "page: " + this.currentPage);
+                    setTimeout(() => {
+                        if (this.infiniteScroll != null) {
+                            this.infiniteScroll.complete();
+                        }
+                    }, 1000);
+                })
+                .catch(e => {
+                    console.log(e);
+                    if (this.infiniteScroll != null) {
+                        this.infiniteScroll.complete();
+                    }
+                });
+        }).catch(e => {
+            console.log(e);
+            if (this.infiniteScroll != null) {
+                this.infiniteScroll.complete();
             }
         });
     }
-
-    presentLoading() {
-        let loading = this.loadingCtl.create({
-            content: ""
-        });
-        loading.present();
-        this.loading = loading;
-    }
-
-    dismissLoading() {
-        if (this.loading != null) {
-            this.loading.dismiss();
-            this.loading = null;
-        }
-    }
-
-    // doInfinite(infiniteScroll) {
-    //     console.log("page: "+ this.page + " currentPage: " + this.currentPage);
-    //     if (this.currentPage < this.page) {
-    //         this.currentPage++;
-    //         this.storage.get("data"+ this.currentPage).then(value => {
-    //             if (value != null) {
-    //                 this.plantList = this.plantList.concat(value);
-    //             }
-    //             infiniteScroll.complete();
-    //
-    //             if (this.currentPage >= this.page) {
-    //                 infiniteScroll.enable(false);
-    //             }
-    //         });
-    //     } else {
-    //         infiniteScroll.complete();
-    //         infiniteScroll.enable(false);
-    //     }
-    // }
 }

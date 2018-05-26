@@ -3,9 +3,8 @@ import {App, IonicPage, Loading, LoadingController, NavController, NavParams} fr
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {GlobalProvider} from "../../providers/global/global";
-import {Toast} from "@ionic-native/toast";
 import {PlantDetailPage} from "../plant-detail/plant-detail";
-import {Storage} from "@ionic/storage";
+import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 
 /**
  * Generated class for the PlantIdtPhotoPage page.
@@ -27,8 +26,7 @@ export class PlantIdtPhotoPage {
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 private camera: Camera, private permissions: AndroidPermissions,
                 private loadingCtl: LoadingController, private network: GlobalProvider,
-                private toast: Toast, public app: App,
-                private storage: Storage) {
+                public app: App, private sqlite: SQLite) {
     }
 
     ionViewDidLoad() {
@@ -72,21 +70,16 @@ export class PlantIdtPhotoPage {
 
                 // 数据缓存，用于历史记录
                 this.data['image'] = this.imageData;
-                let arr: any[] = [];
-                arr[0] = this.data;
-                this.storage.get("data").then(data => {
-                    if (data != null) {
-                        arr = arr.concat(data);
-                    }
-                    this.storage.set("data", arr);
-                });
+                this.saveData();
+
                 this.dismissLoading();
                 this.jumpToDetail();
             }).catch(error => {
+                console.log("network error: " + error);
                 this.dismissLoading();
             });
         }, (err) => {
-            console.log('打开相机失败');
+            console.log('打开相机失败: ' + err);
         });
     }
 
@@ -128,5 +121,20 @@ export class PlantIdtPhotoPage {
             this.loading.dismiss();
             this.loading = null;
         }
+    }
+
+    saveData() {
+        this.sqlite.create({
+            name: 'ionicdb.db',
+            location: 'default'
+        }).then((db: SQLiteObject) => {
+            db.executeSql('CREATE TABLE IF NOT EXISTS identification(id INTEGER PRIMARY KEY, data TEXT)', {})
+                .then(res => console.log('Executed SQL'))
+                .catch(e => console.log(e));
+            db.executeSql('INSERT INTO identification VALUES(NULL, ?)',
+                [JSON.stringify(this.data)])
+                .then(res => console.log(res))
+                .catch(e => console.log(e));
+        }).catch(e => console.log(e));
     }
 }

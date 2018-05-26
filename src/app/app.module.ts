@@ -28,6 +28,7 @@ import {HTTP} from "@ionic-native/http";
 import {DiseaseSearchPage} from "../pages/disease-search/disease-search";
 import {InsectSearchPage} from "../pages/insect-search/insect-search";
 import {IonicStorageModule} from "@ionic/storage";
+import {SQLite} from "@ionic-native/sqlite";
 
 @NgModule({
     declarations: [
@@ -83,7 +84,8 @@ import {IonicStorageModule} from "@ionic/storage";
         AndroidPermissions,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         GlobalProvider,
-        HTTP
+        HTTP,
+        SQLite
     ]
 })
 export class AppModule {
