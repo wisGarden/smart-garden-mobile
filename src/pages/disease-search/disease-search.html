@@ -9,23 +9,23 @@
         </ion-refresher-content>
     </ion-refresher>
     <div style="position: relative;margin-top: 6px">
-        <ion-searchbar (ionInput)="getItems($event)" placeholder="请输入..."
-                       (keyup)="onSearchKeyUp($event)"></ion-searchbar>
+        <ion-searchbar id="searchbar" (ionInput)="getItems($event)" placeholder="请输入植物或病害名称"
+                       (keyup)="onSearchKeyUp($event)" [(ngModel)]="keyword"></ion-searchbar>
     </div>
 
     <div *ngIf="keyword == null || keyword.toString().trim() == ''">
-        <div *ngIf="historyList == null; else historyTemplate">
-            <div class="history-title-line"></div>
-            <p class="history-title"><img src="assets/imgs/icon-sad-light-gray.png" class="history-img"><span>&nbsp;无搜索历史</span></p>
-        </div>
         <ng-template #historyTemplate>
             <div class="history-title-line"></div>
             <p class="history-title"><span>搜索历史</span></p>
             <div class="history">
-                <span *ngFor="let item of historyList">{{item?.keyword}}</span>
-                <span>玉米</span>
+                <span *ngFor="let item of historyList" (click)="historySearch(item?.keyword)" (press)="doDeleteHistory(item?.id)">{{item?.keyword}}</span>
+                <span class="delete" (click)="doDeleteHistory(0)">X</span>
             </div>
         </ng-template>
+        <div *ngIf="historyList.length == 0; else historyTemplate">
+            <div class="history-title-line"></div>
+            <p class="history-title"><img src="assets/imgs/icon-sad-light-gray.png" class="history-img"><span>&nbsp;无搜索历史</span></p>
+        </div>
     </div>
 
     <ng-template #listTemplate>

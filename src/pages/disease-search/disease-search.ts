@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, Keyboard, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, Keyboard, NavController, NavParams} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 
@@ -21,7 +21,7 @@ export class DiseaseSearchPage {
     diseaseList: any = null;
     plantList: any = null;
     hotList: any = null;
-    historyList: any = null;
+    historyList: any = [];
 
     currentPage: number = 1;
     keyword: string = null;
@@ -30,9 +30,11 @@ export class DiseaseSearchPage {
     hasMoreDisease: boolean = true;
     hasMorePlant: boolean = true;
 
+    updateHistorySql: boolean = false;
+
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 public keyboard: Keyboard, public network: GlobalProvider,
-                private sqlite: SQLite) {
+                public sqlite: SQLite, public alerCtrl: AlertController) {
     }
 
     ionViewDidLoad() {
@@ -49,7 +51,6 @@ export class DiseaseSearchPage {
             // TODO
             let keyword = event.target.value;
             if (keyword != null && keyword.toString().trim() != "") {
-                alert(keyword);
                 this.setHistory(keyword);
             }
             this.getItems(event);
@@ -59,7 +60,6 @@ export class DiseaseSearchPage {
     getItems(event) {
         this.keyword = event.target.value;
         this.loadData(true);
-        // alert(keyword);
     }
 
     replaceAll(text) {
@@ -219,7 +219,6 @@ export class DiseaseSearchPage {
         if (this.keyword == null || this.keyword.toString().trim() == "") {
             this.plantList = null;
             this.diseaseList = null;
-            this.loadHistory();
             this.loadHotData(true);
             return;
         }
@@ -237,6 +236,11 @@ export class DiseaseSearchPage {
     }
 
     setHistory(keyword) {
+        if (this.updateHistorySql) {
+            return;
+        }
+        this.updateHistorySql = true;
+
         this.sqlite.create({
             name: 'ionicdb.db',
             location: 'default'
@@ -244,26 +248,34 @@ export class DiseaseSearchPage {
             db.executeSql('CREATE TABLE IF NOT EXISTS keywords(id INTEGER PRIMARY KEY, type INT, keyword TEXT DEFAULT 0, update_time INT DEFAULT 0, delete_time INT DEFAULT 0)', {})
                 .then(res => console.log('Executed SQL'))
                 .catch(e => console.log(e));
-            db.executeSql('SELECT * FROM keywords WHERE keyword = ? and delete_time = 0', [keyword])
+            db.executeSql('SELECT * FROM keywords WHERE keyword = ? and delete_time = 0 and type = 0', [keyword])
                 .then(res => {
                     if (res.rows.length != 0) {
-                        let id = res.rows.item(0);
-                        let updateTime = Date.parse(new Date().toDateString()) / 1000;
+                        let id = res.rows.item(0).id;
+                        let updateTime = Date.now() / 1000;
                         db.executeSql('UPDATE keywords SET update_time = ? WHERE id = ?', [updateTime, id])
                             .then(res => console.log('Executed SQL'))
                             .catch(e => console.log(e));
                     } else {
-                        let updateTime = Date.parse(new Date().toDateString()) / 1000;
+                        let updateTime = Date.now() / 1000;
                         db.executeSql('INSERT INTO keywords VALUES(NULL, 0, ?, ?, 0)',
                             [keyword, updateTime])
                             .then(res => console.log(res))
                             .catch(e => console.log(e));
                     }
+                    this.updateHistorySql = false;
+
+                    // 用户无感知刷新列表
+                    this.loadHistory();
                 })
                 .catch(e => {
                     console.log(e);
+                    this.updateHistorySql = false;
                 });
-        }).catch(e => console.log(e));
+        }).catch(e => {
+            console.log(e);
+            this.updateHistorySql = false;
+        });
     }
 
     loadHistory() {
@@ -276,8 +288,9 @@ export class DiseaseSearchPage {
                 .catch(e => console.log(e));
             db.executeSql('SELECT * FROM keywords WHERE type = 0 and delete_time = 0 ORDER BY update_time DESC limit 15', {})
                 .then(res => {
+                    this.historyList = [];
                     for (let i = 0; i < res.rows.length; i++) {
-                        this.historyList.push(JSON.parse(res.rows.item(i)));
+                        this.historyList.push(res.rows.item(i));
                     }
                 })
                 .catch(e => {
@@ -297,16 +310,48 @@ export class DiseaseSearchPage {
                 .then(res => console.log('Executed SQL'))
                 .catch(e => console.log(e));
 
-            let deleteTime = Date.parse(new Date().toDateString()) / 1000;
+            let deleteTime = Date.now() / 1000;
             if (id == 0) {
-                db.executeSql('UPDATE keywords SET deleteTime = ? where delete_time <> 0', [deleteTime])
+                db.executeSql('UPDATE keywords SET delete_time = ? where delete_time = 0', [deleteTime])
                     .then(res => console.log('Executed SQL'))
                     .catch(e => console.log(e));
             } else {
-                db.executeSql('UPDATE keywords SET deleteTime = ? WHERE id = ?', [deleteTime, id])
+                db.executeSql('UPDATE keywords SET delete_time = ? WHERE id = ?', [deleteTime, id])
                     .then(res => console.log('Executed SQL'))
                     .catch(e => console.log(e));
             }
         }).catch(e => console.log(e));
+    }
+
+    historySearch(keyword) {
+        setTimeout(() => {
+            this.keyword = keyword;
+            document.getElementById("searchbar").classList.add("searchbar-has-focus");
+            document.getElementById("searchbar").getElementsByTagName("input").item(0).focus();
+            this.setHistory(keyword);
+            this.loadData(true);
+        }, 500);
+    }
+
+    doDeleteHistory(id) {
+        let confirm = this.alerCtrl.create({
+            title: '您确定要删除吗？',
+            message: '您确定删除'+ (id == 0 ? '所有' : '这条') +'历史记录吗？确定点击是，不确定点击否。',
+            buttons: [
+                {
+                    text: '否',
+                    handler: () => {
+                    }
+                },
+                {
+                    text: '是',
+                    handler: () => {
+                        this.deleteHistory(id);
+                        this.loadHistory();
+                    }
+                }
+            ]
+        });
+        confirm.present();
     }
 }

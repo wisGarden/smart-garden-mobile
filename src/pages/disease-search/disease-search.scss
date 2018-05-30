@@ -148,4 +148,15 @@ page-disease-search {
   .has-refresher > .scroll-content {
     border-top: none;
   }
+
+  .delete {
+    padding: 0.5em 0.9em !important;
+    background: #EFEFEF !important;
+    color: #000000 !important;
+  }
+
+  .delete:active {
+    background: #E14A4B !important;
+    color: #FFFFFF !important;
+  }
 }
