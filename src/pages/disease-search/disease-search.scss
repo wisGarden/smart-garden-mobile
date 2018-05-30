@@ -22,6 +22,7 @@ page-disease-search {
 
   .searchbar-input {
     width: 75%;
+    margin: 0 auto;
   }
 
   .history-title-line {
@@ -31,10 +32,10 @@ page-disease-search {
   }
 
   .history-title {
-    font-size: 16px;
+    font-size: 14px;
     color: #D8D8D8;
     text-align: center;
-    margin-top: -12px;
+    margin-top: -11px;
   }
 
   .history-title span {
@@ -72,7 +73,7 @@ page-disease-search {
   }
 
   .searchbar-ios .searchbar-clear-icon {
-    right: 25%;
+    right: 13%;
   }
 
   .card-ios {
@@ -112,10 +113,39 @@ page-disease-search {
   }
 
   .item-ios {
+    padding-left: 0;
     background: none;
+  }
+
+  .item-ios.item-block .item-inner {
+    padding-right: 0;
+  }
+
+  .card {
+    margin-top: -12px;
+    padding-top: 12px;
   }
 
   .card:active {
     background-color: #EFEFEF;
+  }
+
+  .label-ios {
+    margin: 0;
+  }
+
+  .margin-bottom-12px {
+    margin-bottom: 12px;
+  }
+
+  .history-img {
+    width: 1em;
+    height: 1em;
+    margin-bottom: -2px;
+    background-color: #FFFFFF;
+  }
+
+  .has-refresher > .scroll-content {
+    border-top: none;
   }
 }

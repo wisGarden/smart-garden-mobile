@@ -1,37 +1,106 @@
 <title-bar pageTitle="病害查询" startIconName="arrow-back" searchIconName="" endIconName="" isSearch="true"></title-bar>
 
 <ion-content class="margin-top-3">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles">
+        </ion-refresher-content>
+    </ion-refresher>
     <div style="position: relative;margin-top: 6px">
         <ion-searchbar (ionInput)="getItems($event)" placeholder="请输入..."
-                       style="display: inline-block;position: relative;padding-left: 14px"></ion-searchbar>
-        <div>
-            <ion-select [(ngModel)]="option" interface="popover">
-                <ion-option value="plant">植物</ion-option>
-                <ion-option value="disease">病害</ion-option>
-            </ion-select>
+                       (keyup)="onSearchKeyUp($event)"></ion-searchbar>
+    </div>
+
+    <div *ngIf="keyword == null || keyword.toString().trim() == ''">
+        <div *ngIf="historyList == null; else historyTemplate">
+            <div class="history-title-line"></div>
+            <p class="history-title"><img src="assets/imgs/icon-sad-light-gray.png" class="history-img"><span>&nbsp;无搜索历史</span></p>
         </div>
+        <ng-template #historyTemplate>
+            <div class="history-title-line"></div>
+            <p class="history-title"><span>搜索历史</span></p>
+            <div class="history">
+                <span *ngFor="let item of historyList">{{item?.keyword}}</span>
+                <span>玉米</span>
+            </div>
+        </ng-template>
     </div>
-    <div class="history-title-line"></div>
-    <p class="history-title"><span>搜索历史</span></p>
-    <div class="history">
-        <span>白斑病</span>
-        <span>玉米</span>
+
+    <ng-template #listTemplate>
+        <div *ngIf="diseaseList != null || plantList != null">
+            <div class="history-title-line"></div>
+            <p class="history-title"><img src="assets/imgs/icon-sad-light-gray.png"
+                                          class="history-img"><span>&nbsp;没有查找到内容</span></p>
+        </div>
+    </ng-template>
+    <div *ngIf="diseaseList?.data != null || plantList?.data != null; else listTemplate">
+        <div class="history-title-line"></div>
+        <p class="history-title"><span>搜索结果</span></p>
+        <ion-item class="margin-bottom-3">
+            <div class="card" *ngFor="let item of plantList?.data;let i = index">
+                <ion-card>
+                    <ion-row>
+                        <ion-col col-4><img src="{{getImageUrl(item?.imageUrl)}}" class="card-img">
+                        </ion-col>
+                        <ion-col class="card-main" col-8 ion-item>
+                            <input hidden value="{{item?.id}}"/>
+                            <div class="card-margin-bottom-8">{{item?.name}}</div>
+                            <p class="card-margin-bottom-8 card-description"
+                               [innerHTML]="replaceAll(item?.description)"></p>
+                            <p>{{item?.family}}{{item?.genus}}</p>
+                        </ion-col>
+                    </ion-row>
+                    <div class="line"></div>
+                </ion-card>
+            </div>
+
+            <div class="card" *ngFor="let item of diseaseList?.data;let i = index">
+                <ion-card>
+                    <ion-row>
+                        <ion-col col-4><img src="{{getImageUrl(item?.imageUrl)}}" class="card-img">
+                        </ion-col>
+                        <ion-col class="card-main" col-8 ion-item>
+                            <input hidden value="{{item?.id}}"/>
+                            <div class="card-margin-bottom-8">{{item?.name}}</div>
+                            <p class="card-margin-bottom-8 card-description"
+                               [innerHTML]="replaceAll(item?.description)"></p>
+                            <p>{{item?.plantName}}病害</p>
+                        </ion-col>
+                    </ion-row>
+                    <div class="line"></div>
+                </ion-card>
+            </div>
+        </ion-item>
     </div>
-    <div class="history-title-line"></div>
-    <p class="history-title"><span>热门搜索</span></p>
-    <ion-item class="margin-bottom-3">
-        <ion-card>
-            <ion-row class="card">
-                <ion-col col-4><img src="assets/imgs/1.png" class="card-img"></ion-col>
-                <ion-col class="card-main" col-8 ion-item>
-                    <div class="card-margin-bottom-8">名称</div>
-                    <p class="card-margin-bottom-8 card-description">
-                        茉莉花常见虫，该虫在花内危害花冠、花蕊，以在子房周围为最多
-                    </p>
-                    <p>植物病害</p>
-                </ion-col>
-            </ion-row>
-            <div class="line"></div>
-        </ion-card>
-    </ion-item>
+
+    <div *ngIf="plantList?.data == null && diseaseList?.data == null">
+        <div class="history-title-line"></div>
+        <p class="history-title"><span>热门搜索</span></p>
+        <ion-item class="margin-bottom-3">
+            <div class="card" *ngFor="let item of hotList?.data">
+                <ion-card>
+                    <ion-row>
+                        <ion-col col-4><img src="{{getImageUrl(item?.imageUrl)}}" class="card-img">
+                        </ion-col>
+                        <ion-col class="card-main" col-8 ion-item>
+                            <input hidden value="{{item?.id}}"/>
+                            <div class="card-margin-bottom-8">{{item?.name}}</div>
+                            <p class="card-margin-bottom-8 card-description"
+                               [innerHTML]="replaceAll(item?.description)"></p>
+                            <p>{{item?.plantName}}病害</p>
+                        </ion-col>
+                    </ion-row>
+                    <div class="line"></div>
+                </ion-card>
+            </div>
+
+        </ion-item>
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

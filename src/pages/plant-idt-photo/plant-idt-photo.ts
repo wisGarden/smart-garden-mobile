@@ -59,24 +59,28 @@ export class PlantIdtPhotoPage {
         };
 
         this.camera.getPicture(options).then((imageData) => {
-            // console.log("got file: " + imageData);
+            console.log("got file: " + imageData);
 
             this.presentLoading();
 
             // If it's base64:
             this.imageData = 'data:image/jpeg;base64,' + imageData;
-            this.network.getPlantList(imageData).then(data => {
-                this.data = JSON.parse(data.data);
+            this.dismissLoading();
+            this.network.getPlantList(imageData, (data, error) => {
+                if (data) {
+                    this.data = data;
 
-                // 数据缓存，用于历史记录
-                this.data['image'] = this.imageData;
-                this.saveData();
+                    // 数据缓存，用于历史记录
+                    this.data['image'] = this.imageData;
+                    this.saveData();
 
-                this.dismissLoading();
-                this.jumpToDetail();
-            }).catch(error => {
-                console.log("network error: " + error);
-                this.dismissLoading();
+                    this.dismissLoading();
+                    this.jumpToDetail();
+                }
+
+                if (error) {
+                    this.dismissLoading();
+                }
             });
         }, (err) => {
             console.log('打开相机失败: ' + err);

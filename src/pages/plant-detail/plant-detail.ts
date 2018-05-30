@@ -34,11 +34,13 @@ export class PlantDetailPage {
 
         if (this.data.hasOwnProperty("data") && this.data['data'].length > 0) {
             if (this.data['data'][this.index].hasOwnProperty("infoUrl")) {
-                this.network.getPlant(this.data['data'][this.index]['infoUrl']).then(data => {
-                    this.plantDetail = JSON.parse(data.data);
-                    if (this.showLoading) {
-                        this.dismissLoading();
-                        this.showLoading = false;
+                this.network.getPlant(this.data['data'][this.index]['infoUrl'], (data, error) => {
+                    if (data) {
+                        this.plantDetail = data;
+                        if (this.showLoading) {
+                            this.dismissLoading();
+                            this.showLoading = false;
+                        }
                     }
                 });
             }
@@ -61,11 +63,15 @@ export class PlantDetailPage {
         this.presentLoading();
         if (this.data.hasOwnProperty("data") && this.data['data'].length > 0) {
             if (this.data['data'][i].hasOwnProperty("infoUrl")) {
-                this.network.getPlant(this.data['data'][i]['infoUrl']).then(data => {
-                    this.dismissLoading();
-                    this.plantDetail = JSON.parse(data.data);
-                }).catch(error => {
-                    this.dismissLoading();
+                this.network.getPlant(this.data['data'][i]['infoUrl'], (data, error) => {
+                    if (data) {
+                        this.dismissLoading();
+                        this.plantDetail = data;
+                    }
+
+                    if (error) {
+                        this.dismissLoading();
+                    }
                 });
             }
         } else {
