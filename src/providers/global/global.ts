@@ -12,6 +12,8 @@ const DISEASE_DETAIL = "getDisease";
 const DISEASE_ALL = "findAllDiseases";
 const INSECT_ALL = "findAllInsects";
 const DISEASE_PLANT = "getPlantsFromDisease";
+const DISEASES = "getDiseasesByPlantId";
+const PLANT_DESCRIPTION = "getPlantDescription";
 const TEST = "testtest";
 
 @Injectable()
@@ -158,6 +160,21 @@ export class GlobalProvider {
         this.GET(BASEURL + DISEASE_PLANT, {name: name, page: page}, callback);
     }
 
+    /**
+     * 通过植物id获取病害列表
+     */
+    getDiseasesByPlantId(id, page, callback) {
+        this.GET(BASEURL + DISEASES, {id: id, page: page}, callback);
+    }
+
+    /**
+     * 病虫害搜索获取植物信息
+     */
+    getPlantDescription(id, callback) {
+        this.GET(BASEURL + PLANT_DESCRIPTION, {id: id}, callback);
+    }
+
+    // Dumplicate
     test(name, page, callback) {
         this.GET(BASEURL + TEST, {"name": "123", "page": 1}, callback);
     }

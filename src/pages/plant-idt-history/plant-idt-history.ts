@@ -36,11 +36,10 @@ export class PlantIdtHistoryPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad PlantIdtHistoryPage');
-        this.loadData(true);
     }
 
     ionViewDidEnter() {
-
+        this.loadData(true);
     }
 
     doRefresh(refresher) {

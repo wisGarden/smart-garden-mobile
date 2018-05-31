@@ -3,6 +3,7 @@ import {AlertController, App, IonicPage, Keyboard, NavParams} from 'ionic-angula
 import {GlobalProvider} from "../../providers/global/global";
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 import {DiseaseDetailPage} from "../disease-detail/disease-detail";
+import {DiseasePlantPage} from "../disease-plant/disease-plant";
 
 /**
  * Generated class for the DiseaseSearchPage page.
@@ -240,6 +241,9 @@ export class DiseaseSearchPage {
     }
 
     setHistory(keyword) {
+        if (this.keyword == null || this.keyword.toString().trim() == "") {
+            return;
+        }
         if (this.updateHistorySql) {
             return;
         }
@@ -360,9 +364,18 @@ export class DiseaseSearchPage {
     }
 
     jumpToDetail(id) {
+        this.setHistory(this.keyword);
         this.app.getRootNav().push(DiseaseDetailPage,
             {
                 id:id
+            });
+    }
+
+    jumpToDiseasePlant(id) {
+        this.setHistory(this.keyword);
+        this.app.getRootNav().push(DiseasePlantPage,
+            {
+                id: id
             });
     }
 }

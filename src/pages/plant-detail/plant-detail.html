@@ -7,7 +7,7 @@
         <img class="pic" src="{{plantDetail?.data?.images[0]}}" *ngIf="plantDetail?.data?.images[0] != null">
         <button class="label-title">{{plantDetail?.data?.nameStd}}</button>
     </div>
-    <div class="padding-vertical">
+    <div class="padding-vertical article">
         <p class="top-description">{{plantDetail?.data?.description}}</p>
         <table class="table">
             <tr *ngIf="plantDetail?.data?.alias != ''">
@@ -25,43 +25,33 @@
         </table>
         <div *ngIf="plantDetail?.data?.info?.xgsc != ''">
             <p><b>相关诗词：</b></p>
-            <p>{{plantDetail?.data?.info?.xgsc}}</p>
+            <p class="subcontent">{{plantDetail?.data?.info?.xgsc}}</p>
         </div>
         <div *ngIf="plantDetail?.data?.info?.jzgy != ''">
             <p><b>价值功用：</b></p>
-            <p>{{plantDetail?.data?.info?.jzgy}}</p>
+            <p class="subcontent">{{plantDetail?.data?.info?.jzgy}}</p>
         </div>
         <div *ngIf="plantDetail?.data?.info?.fbdq != ''">
             <p><b>分布地区：</b></p>
-            <p>{{plantDetail?.data?.info?.fbdq}}</p>
+            <p class="subcontent">{{plantDetail?.data?.info?.fbdq}}</p>
         </div>
         <div *ngIf="plantDetail?.data?.info?.yhjs != ''">
             <p><b>养护技术：</b></p>
-            <p>{{plantDetail?.data?.info?.yhjs}}</p>
+            <p class="subcontent">{{plantDetail?.data?.info?.yhjs}}</p>
         </div>
         <div *ngIf="plantDetail?.data?.info?.bxtz != ''">
             <p><b>表型特征：</b></p>
-            <p>{{plantDetail?.data?.info?.bxtz}}</p>
+            <p class="subcontent">{{plantDetail?.data?.info?.bxtz}}</p>
         </div>
         <div *ngIf="plantDetail?.data?.info?.hksj != ''">
             <p><b>花开时节：</b></p>
-            <p>{{plantDetail?.data?.info?.hksj}}</p>
+            <p class="subcontent">{{plantDetail?.data?.info?.hksj}}</p>
         </div>
 
         <div class="history-title-line"></div>
         <p class="history-title"><span><b>相 关 推 荐</b></span></p>
 
         <ion-grid class="grid">
-            <!--<ion-row>-->
-                <!--<ion-col>-->
-                    <!--<img src="assets/imgs/1.png">-->
-                    <!--<label>三日月美人</label>-->
-                <!--</ion-col>-->
-                <!--<ion-col>-->
-                    <!--<img src="assets/imgs/1.png">-->
-                    <!--<label>阿吉塔玫瑰</label>-->
-                <!--</ion-col>-->
-            <!--</ion-row>-->
             <ion-row justify-content-start>
                 <ion-col col-4 *ngFor="let item of data?.data;let i = index">
                     <img src="{{item?.imageUrl}}" (click)="jumpToOtherPlant(i)" *ngIf="item?.name != plantDetail?.data?.nameStd; else elseBlock;">
