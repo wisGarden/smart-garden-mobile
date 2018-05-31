@@ -3,7 +3,7 @@ page-disease-detail {
     width: 100%;
     height: 243px;
   }
-  .p1 {
+  .title-div {
     text-align: center;
     padding: 25px 40px 25px 50px;
     font-size: 17px;
@@ -21,7 +21,7 @@ page-disease-detail {
     color: #479DF7;
     letter-spacing: 5px;
   }
-  .title1 {
+  .subtitle {
     color: #479DF7;
     text-align: center;
     font-size: 17px;
@@ -29,24 +29,24 @@ page-disease-detail {
     letter-spacing: 5px;
     margin: -12px 0 15px 0;
   }
-  .title1 span {
+  .subtitle span {
     background: #FFFFFF;
   }
-  .p2 {
+  .description {
     margin: 35px 15px 15px 15px;
     color: #7A7A7D;
-    font-size: 10px;
+    font-size: 13px;
     letter-spacing: 3px;
     line-height: 20px;
   }
-  .p4 {
+  .subcontent {
     margin: 0 15px 25px 15px;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 3px;
     color: #000000;
     line-height: 25px;
   }
-  .p3 {
+  .title {
     position: absolute;
     border-radius: 15px;
     padding-top: 12.5px;
@@ -54,6 +54,7 @@ page-disease-detail {
     top: 0;
     right: 0;
     bottom: 0;
+    font-size: 18px;
   }
   .div-line {
     height: 1px;

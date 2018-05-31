@@ -39,13 +39,12 @@
         <div class="history-title-line"></div>
         <p class="history-title"><span>搜索结果</span></p>
         <ion-item class="margin-bottom-3">
-            <div class="card" *ngFor="let item of plantList?.data;let i = index">
+            <div class="card" *ngFor="let item of plantList?.data;">
                 <ion-card>
                     <ion-row>
                         <ion-col col-4><img src="{{getImageUrl(item?.imageUrl)}}" class="card-img">
                         </ion-col>
                         <ion-col class="card-main" col-8 ion-item>
-                            <input hidden value="{{item?.id}}"/>
                             <div class="card-margin-bottom-8">{{item?.name}}</div>
                             <p class="card-margin-bottom-8 card-description"
                                [innerHTML]="replaceAll(item?.description)"></p>
@@ -56,13 +55,12 @@
                 </ion-card>
             </div>
 
-            <div class="card" *ngFor="let item of diseaseList?.data;let i = index">
+            <div class="card" *ngFor="let item of diseaseList?.data;" (click)="jumpToDetail(item?.id)">
                 <ion-card>
                     <ion-row>
                         <ion-col col-4><img src="{{getImageUrl(item?.imageUrl)}}" class="card-img">
                         </ion-col>
                         <ion-col class="card-main" col-8 ion-item>
-                            <input hidden value="{{item?.id}}"/>
                             <div class="card-margin-bottom-8">{{item?.name}}</div>
                             <p class="card-margin-bottom-8 card-description"
                                [innerHTML]="replaceAll(item?.description)"></p>
@@ -79,13 +77,12 @@
         <div class="history-title-line"></div>
         <p class="history-title"><span>热门搜索</span></p>
         <ion-item class="margin-bottom-3">
-            <div class="card" *ngFor="let item of hotList?.data">
+            <div class="card" *ngFor="let item of hotList?.data" (click)="jumpToDetail(item?.id)">
                 <ion-card>
                     <ion-row>
                         <ion-col col-4><img src="{{getImageUrl(item?.imageUrl)}}" class="card-img">
                         </ion-col>
                         <ion-col class="card-main" col-8 ion-item>
-                            <input hidden value="{{item?.id}}"/>
                             <div class="card-margin-bottom-8">{{item?.name}}</div>
                             <p class="card-margin-bottom-8 card-description"
                                [innerHTML]="replaceAll(item?.description)"></p>

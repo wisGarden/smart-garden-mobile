@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, Keyboard, NavController, NavParams} from 'ionic-angular';
+import {AlertController, App, IonicPage, Keyboard, NavParams} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
+import {DiseaseDetailPage} from "../disease-detail/disease-detail";
 
 /**
  * Generated class for the DiseaseSearchPage page.
@@ -32,7 +33,7 @@ export class DiseaseSearchPage {
 
     updateHistorySql: boolean = false;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams,
+    constructor(public app: App, public navParams: NavParams,
                 public keyboard: Keyboard, public network: GlobalProvider,
                 public sqlite: SQLite, public alerCtrl: AlertController) {
     }
@@ -71,6 +72,9 @@ export class DiseaseSearchPage {
     }
 
     getImageUrl(imageUrls) {
+        if (imageUrls == null) {
+            return null;
+        }
         if (!imageUrls.split("#")[0].match("http")) {
             return this.network.getBaseUrl() + imageUrls.split("#")[0];
         } else {
@@ -353,5 +357,12 @@ export class DiseaseSearchPage {
             ]
         });
         confirm.present();
+    }
+
+    jumpToDetail(id) {
+        this.app.getRootNav().push(DiseaseDetailPage,
+            {
+                id:id
+            });
     }
 }
