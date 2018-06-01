@@ -13,6 +13,7 @@ const DISEASE_ALL = "findAllDiseases";
 const INSECT_ALL = "findAllInsects";
 const DISEASE_PLANT = "getPlantsFromDisease";
 const DISEASES = "getDiseasesByPlantId";
+const INSECTS = "getInsectsByPlantId";
 const PLANT_DESCRIPTION = "getPlantDescription";
 const TEST = "testtest";
 
@@ -165,6 +166,13 @@ export class GlobalProvider {
      */
     getDiseasesByPlantId(id, page, callback) {
         this.GET(BASEURL + DISEASES, {id: id, page: page}, callback);
+    }
+
+    /**
+     * 通过植物id获取病害列表
+     */
+    getInsectsByPlantId(id, page, callback) {
+        this.GET(BASEURL + INSECTS, {id: id, page: page}, callback);
     }
 
     /**

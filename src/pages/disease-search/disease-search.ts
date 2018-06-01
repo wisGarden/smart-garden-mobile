@@ -19,7 +19,6 @@ import {DiseasePlantPage} from "../disease-plant/disease-plant";
 })
 export class DiseaseSearchPage {
 
-    option: string = "plant";
     diseaseList: any = null;
     plantList: any = null;
     hotList: any = null;
@@ -50,7 +49,6 @@ export class DiseaseSearchPage {
             if (this.keyboard.isOpen()) {//如果键盘开启则隐藏键盘
                 this.keyboard.close();
             }
-            // TODO
             let keyword = event.target.value;
             if (keyword != null && keyword.toString().trim() != "") {
                 this.setHistory(keyword);
@@ -320,7 +318,7 @@ export class DiseaseSearchPage {
 
             let deleteTime = Date.now() / 1000;
             if (id == 0) {
-                db.executeSql('UPDATE keywords SET delete_time = ? where delete_time = 0', [deleteTime])
+                db.executeSql('UPDATE keywords SET delete_time = ? where delete_time = 0 and type = 1', [deleteTime])
                     .then(res => console.log('Executed SQL'))
                     .catch(e => console.log(e));
             } else {
@@ -363,8 +361,10 @@ export class DiseaseSearchPage {
         confirm.present();
     }
 
-    jumpToDetail(id) {
-        this.setHistory(this.keyword);
+    jumpToDetail(id, isFromHotsearch) {
+        if (!isFromHotsearch) {
+            this.setHistory(this.keyword);
+        }
         this.app.getRootNav().push(DiseaseDetailPage,
             {
                 id:id

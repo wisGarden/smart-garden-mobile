@@ -1,4 +1,4 @@
-<title-bar pageTitle="病害详情" startIconName="arrow-back" searchIconName="" endIconName="" isSearch="true"></title-bar>
+<title-bar pageTitle="虫害详情" startIconName="arrow-back" searchIconName="" endIconName="" isSearch="true"></title-bar>
 
 <ion-content class="margin-top-3">
     <img class="img" src="{{getImageUrl(detailList?.diseaseImage)}}">
@@ -7,10 +7,15 @@
     </div>
     <div class="description" [innerHTML]="replaceAll(detailList?.diseaseDescription)"></div>
     <div class="subcontent" [innerHTML]="detailList?.diseaseSymptom"></div>
-    <div *ngIf="detailList?.diseaseLaw != null">
+    <div *ngIf="detailList?.diseaseCharacter != null">
         <div class="div-line"></div>
-        <p class="subtitle"><span>发病规律</span></p>
-        <div class="subcontent" [innerHTML]="detailList?.diseaseLaw"></div>
+        <p class="subtitle"><span>形态特征</span></p>
+        <div class="subcontent" [innerHTML]="detailList?.diseaseCharacter"></div>
+    </div>
+    <div *ngIf="detailList?.diseaseCustom != null">
+        <div class="div-line"></div>
+        <p class="subtitle"><span>生活习性</span></p>
+        <p class="subcontent margin-bottom-3" [innerHTML]="detailList?.diseaseCustom"></p>
     </div>
     <div *ngIf="detailList?.diseasePrevention != null">
         <div class="div-line"></div>
