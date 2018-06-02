@@ -1,0 +1,37 @@
+<title-bar pageTitle="病害推理" startIconName="md-close" searchIconName="" endIconName=""
+           isSearch="true"></title-bar>
+<ion-content class="margin-top-3">
+    <p class="question">{{currentPage}}. {{options[currentPage - 1]?.question}}</p>
+    <ion-grid class="margin-bottom-7">
+        <ion-row class="option" *ngFor="let option of options[currentPage - 1]?.options;let i = index" (click)="border_active(i, false)">
+                <ng-template #noImageTemplate>
+                    <div class="flex width-100" (click)="changeNextButton(option?.nextQuestionId)">
+                        <ion-col col-1 class="flex">
+                            <span class="align-center"><b>{{i > 25 ? i + 1 : letters[i]}}.</b></span>
+                        </ion-col>
+                        <ion-col col-11 text-left="true" class="flex line-height-20" style="padding: 1em 0;">
+                            <span class="align-center justify">{{option?.answer}}</span>
+                        </ion-col>
+                    </div>
+                </ng-template>
+                <div class="flex width-100" *ngIf="option?.imageUrl != null && option?.imageUrl != ''; else noImageTemplate" (click)="changeNextButton(option?.nextQuestionId)">
+                    <ion-col col-1 class="flex">
+                        <span class="align-center"><b>{{i > 25 ? i + 1 : letters[i]}}.</b></span>
+                    </ion-col>
+                    <ion-col col-7 text-left="true" class="flex line-height-20">
+                        <span class="align-center justify">{{option?.answer}}</span>
+                    </ion-col>
+                    <ion-col col-4 class="flex">
+                        <img class="align-center img-size" src="{{getImageUrl(option?.imageUrl)}}"/>
+                    </ion-col>
+                </div>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
+<ion-footer>
+    <ion-buttons end class="footer-buttons">
+        <button [disabled]="isNextEnabled" class="footer-button float-left" (click)="previous()" *ngIf="currentPage > 1">上一题</button>
+        <button id="nextButton" [disabled]="isPreviousEnabled" class="footer-button" (click)="next()">下一题</button>
+    </ion-buttons>
+</ion-footer>
