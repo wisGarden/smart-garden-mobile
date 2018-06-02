@@ -26,7 +26,7 @@ export class TitleBarComponent {
     }
 
     backClick() {
-        if (this.startIconName == "arrow-back") {
+        if (this.startIconName == "arrow-back" || this.startIconName == "md-close") {
             this.app.getRootNav().pop();
         }
     }

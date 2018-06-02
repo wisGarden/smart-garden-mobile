@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {App, IonicPage, Loading, LoadingController, NavParams} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {DiseaseDetailPage} from "../disease-detail/disease-detail";
+import {DiseaseReasoningPage} from "../disease-reasoning/disease-reasoning";
 
 /**
  * Generated class for the DiseasePlantPage page.
@@ -119,6 +120,13 @@ export class DiseasePlantPage {
     jumpToDetail(id) {
         this.app.getRootNav().push(DiseaseDetailPage, {
             id: id
+        });
+    }
+
+    jumpToDiseaseReasoning() {
+        this.app.getRootNav().push(DiseaseReasoningPage, {
+            plantId: this.id,
+            type: 0
         });
     }
 }

@@ -3,7 +3,7 @@ import {Toast} from "@ionic-native/toast";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {isObject} from "ionic-angular/util/util";
 
-const BASEURL = "http://192.168.0.5:8080/";
+const BASEURL = "http://192.168.199.120:8080/";
 const PLANT = "getPlant";
 const PLANT_LIST = "getPlantList";
 const DISEASE_LIST = "getDiseaseList";
@@ -15,6 +15,9 @@ const DISEASE_PLANT = "getPlantsFromDisease";
 const DISEASES = "getDiseasesByPlantId";
 const INSECTS = "getInsectsByPlantId";
 const PLANT_DESCRIPTION = "getPlantDescription";
+const FIRST_DISEASE_QUESTION = "getFirstDiseaseQuestion";
+const DISEASE_QUESTION = "getDiseaseQuestion";
+const GET_DISEASE_BY_OPTION_ID = "getDiseaseByOptionId";
 const TEST = "testtest";
 
 @Injectable()
@@ -180,6 +183,27 @@ export class GlobalProvider {
      */
     getPlantDescription(id, callback) {
         this.GET(BASEURL + PLANT_DESCRIPTION, {id: id}, callback);
+    }
+
+    /**
+     * 获取病虫害推理第一题
+     */
+    getFirstDiseaseQuestion(plantId, type, callback) {
+        this.GET(BASEURL + FIRST_DISEASE_QUESTION, {plantId: plantId, type: type}, callback);
+    }
+
+    /**
+     * 获取病虫害推理试题
+     */
+    getDiseaseQuestion(id, callback) {
+        this.GET(BASEURL + DISEASE_QUESTION, {id: id}, callback);
+    }
+
+    /**
+     * 通过最后一题选项id获取病虫害信息
+     */
+    getDiseaseByOptionId(id, callback) {
+        this.GET(BASEURL + GET_DISEASE_BY_OPTION_ID, {id: id}, callback);
     }
 
     // Dumplicate

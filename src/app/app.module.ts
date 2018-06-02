@@ -33,6 +33,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {DiseasePlantPage} from "../pages/disease-plant/disease-plant";
 import {InsectDetailPage} from "../pages/insect-detail/insect-detail";
 import {InsectPlantPage} from "../pages/insect-plant/insect-plant";
+import {DiseaseReasoningPage} from "../pages/disease-reasoning/disease-reasoning";
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import {InsectPlantPage} from "../pages/insect-plant/insect-plant";
         DiseasePlantPage,
         InsectSearchPage,
         InsectDetailPage,
-        InsectPlantPage
+        InsectPlantPage,
+        DiseaseReasoningPage
     ],
     imports: [
         BrowserModule,
@@ -87,7 +89,8 @@ import {InsectPlantPage} from "../pages/insect-plant/insect-plant";
         DiseasePlantPage,
         InsectSearchPage,
         InsectDetailPage,
-        InsectPlantPage
+        InsectPlantPage,
+        DiseaseReasoningPage
     ],
     providers: [
         StatusBar,
