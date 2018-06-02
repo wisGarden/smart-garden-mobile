@@ -67,8 +67,8 @@ export class DiseasePlantPage {
     }
 
     getImageUrl(imageUrls) {
-        if (imageUrls == null) {
-            return null;
+        if (imageUrls == null || imageUrls.trim() == '') {
+            return "assets/imgs/img-default.jpg";
         }
         if (!imageUrls.split("#")[0].match("http")) {
             return this.network.getBaseUrl() + imageUrls.split("#")[0];
@@ -126,6 +126,7 @@ export class DiseasePlantPage {
     jumpToDiseaseReasoning() {
         this.app.getRootNav().push(DiseaseReasoningPage, {
             plantId: this.id,
+            plantName: this.plantData.plantName,
             type: 0
         });
     }

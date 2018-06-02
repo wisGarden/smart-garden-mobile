@@ -3,7 +3,7 @@ import {Toast} from "@ionic-native/toast";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {isObject} from "ionic-angular/util/util";
 
-const BASEURL = "http://192.168.199.120:8080/";
+const BASEURL = "http://192.168.0.5:8080/";
 const PLANT = "getPlant";
 const PLANT_LIST = "getPlantList";
 const DISEASE_LIST = "getDiseaseList";
@@ -12,6 +12,7 @@ const DISEASE_DETAIL = "getDisease";
 const DISEASE_ALL = "findAllDiseases";
 const INSECT_ALL = "findAllInsects";
 const DISEASE_PLANT = "getPlantsFromDisease";
+const MUCH_DISEASE_PLANT = "getMuchPlantsFromDisease";
 const DISEASES = "getDiseasesByPlantId";
 const INSECTS = "getInsectsByPlantId";
 const PLANT_DESCRIPTION = "getPlantDescription";
@@ -162,6 +163,13 @@ export class GlobalProvider {
      */
     getDiseasePlant(name, page, callback) {
         this.GET(BASEURL + DISEASE_PLANT, {name: name, page: page}, callback);
+    }
+
+    /**
+     * 病虫害搜索获取植物信息
+     */
+    getMuchDiseasePlant(name, page, callback) {
+        this.GET(BASEURL + MUCH_DISEASE_PLANT, {name: name, page: page, size: 1}, callback);
     }
 
     /**

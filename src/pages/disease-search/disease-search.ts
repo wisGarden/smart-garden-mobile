@@ -71,8 +71,8 @@ export class DiseaseSearchPage {
     }
 
     getImageUrl(imageUrls) {
-        if (imageUrls == null) {
-            return null;
+        if (imageUrls == null || imageUrls.trim() == '') {
+            return "assets/imgs/img-default.jpg";
         }
         if (!imageUrls.split("#")[0].match("http")) {
             return this.network.getBaseUrl() + imageUrls.split("#")[0];
@@ -318,7 +318,7 @@ export class DiseaseSearchPage {
 
             let deleteTime = Date.now() / 1000;
             if (id == 0) {
-                db.executeSql('UPDATE keywords SET delete_time = ? where delete_time = 0 and type = 1', [deleteTime])
+                db.executeSql('UPDATE keywords SET delete_time = ? where delete_time = 0 and type = 0', [deleteTime])
                     .then(res => console.log('Executed SQL'))
                     .catch(e => console.log(e));
             } else {

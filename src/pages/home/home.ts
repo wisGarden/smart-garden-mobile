@@ -3,6 +3,7 @@ import {App, NavController} from 'ionic-angular';
 import {PlantIdtTabsPage} from "../plant-idt-tabs/plant-idt-tabs";
 import {DiseaseSearchPage} from "../disease-search/disease-search";
 import {InsectSearchPage} from "../insect-search/insect-search";
+import {DiseaseReasoningSearchPage} from "../disease-reasoning-search/disease-reasoning-search";
 
 @Component({
     selector: 'page-home',
@@ -26,5 +27,9 @@ export class HomePage {
 
     pushToInsectSearch() {
         this.app.getRootNav().push(InsectSearchPage);
+    }
+
+    pushToDiseaseReasoningSearch() {
+        this.app.getRootNav().push(DiseaseReasoningSearchPage);
     }
 }

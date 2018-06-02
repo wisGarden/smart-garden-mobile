@@ -21,6 +21,7 @@ export class DiseaseReasoningPage {
     loading: Loading;
 
     plantId;
+    plantName;
     type;
 
     currentPage: number = 1; // 注意默认值为1
@@ -40,6 +41,7 @@ export class DiseaseReasoningPage {
                 public network: GlobalProvider, public toast: Toast,
                 public loadingCtl: LoadingController, public platform: Platform) {
         this.plantId = navParams.data.plantId;
+        this.plantName = navParams.data.plantName;
         this.type = navParams.data.type;
     }
 
@@ -92,8 +94,8 @@ export class DiseaseReasoningPage {
 
     next() {
         if (this.answers[this.currentPage] == null) {
-            // this.toast.showShortCenter("请选择一个选项").subscribe();
-            alert("请选择一个选项");
+            this.toast.showShortCenter("请选择一个选项").subscribe();
+            // alert("请选择一个选项");
             return;
         }
         if (this.pre_answers[this.currentPage] == this.answers[this.currentPage]) {
@@ -132,8 +134,8 @@ export class DiseaseReasoningPage {
     }
 
     getImageUrl(imageUrls) {
-        if (imageUrls == null) {
-            return null;
+        if (imageUrls == null || imageUrls.trim() == '') {
+            return "assets/imgs/img-default.jpg";
         }
         if (!imageUrls.split("#")[0].match("http")) {
             return this.network.getBaseUrl() + imageUrls.split("#")[0];
