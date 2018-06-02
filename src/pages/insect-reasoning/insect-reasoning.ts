@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {App, IonicPage, Loading, LoadingController, NavParams, Platform} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {Toast} from "@ionic-native/toast";
-import {DiseaseDetailPage} from "../disease-detail/disease-detail";
+import {InsectDetailPage} from "../insect-detail/insect-detail";
 
 /**
- * Generated class for the DiseaseReasoningPage page.
+ * Generated class for the InsectReasoningPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,10 +13,10 @@ import {DiseaseDetailPage} from "../disease-detail/disease-detail";
 
 @IonicPage()
 @Component({
-    selector: 'page-disease-reasoning',
-    templateUrl: 'disease-reasoning.html',
+    selector: 'page-insect-reasoning',
+    templateUrl: 'insect-reasoning.html',
 })
-export class DiseaseReasoningPage {
+export class InsectReasoningPage {
     letters = ['A', "B", 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     loading: Loading;
 
@@ -46,7 +46,7 @@ export class DiseaseReasoningPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad DiseaseReasoningPage');
+        console.log('ionViewDidLoad InsectReasoningPage');
         this.loadData(true);
     }
 
@@ -182,7 +182,7 @@ export class DiseaseReasoningPage {
             this.nextQuestionId = this.options[this.currentPage - 1].options[pos].nextQuestionId;
             if (this.nextQuestionId == 0) {
                 let optionId = this.options[this.currentPage - 1].options[pos].id;
-                this.jumpToDiseaseDetail(optionId);
+                this.jumpToInsectDetail(optionId);
             } else {
                 this.presentLoading();
                 this.isNextDisabled = true;
@@ -204,8 +204,8 @@ export class DiseaseReasoningPage {
         }
     }
 
-    jumpToDiseaseDetail(optionId) {
-        this.app.getRootNavs()[0].push(DiseaseDetailPage, {
+    jumpToInsectDetail(optionId) {
+        this.app.getRootNavs()[0].push(InsectDetailPage, {
             optionId: optionId
         });
     }

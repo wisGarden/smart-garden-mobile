@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {App, Content, IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {Content, IonicPage, Loading, LoadingController, NavParams} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {Toast} from "@ionic-native/toast";
 
@@ -24,9 +24,8 @@ export class PlantDetailPage {
 
     @ViewChild(Content) content: Content;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams,
-                private network: GlobalProvider, private toast: Toast,
-                private app: App, private loadingCtl: LoadingController) {
+    constructor(public navParams: NavParams, public loadingCtl: LoadingController,
+                public network: GlobalProvider, public toast: Toast) {
 
         this.index = this.navParams.data.index;
 

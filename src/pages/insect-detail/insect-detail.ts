@@ -22,18 +22,30 @@ export class InsectDetailPage {
     constructor(public navCtrl: NavController, public navParams: NavParams,
                 public network: GlobalProvider, public loadingCtl: LoadingController) {
         let id = this.navParams.data.id;
-        this.presentLoading();
-        this.network.getDiseaseDetail(id, (data, error) => {
-            if (data) {
-                this.detailList = data.data;
-            }
+        if (id == null) {
+            let optionId = this.navParams.data.optionId;
+            this.presentLoading();
+            this.network.getDiseaseByOptionId(optionId, (data, error) => {
+                if (data) {
+                    this.detailList = data.data;
+                }
 
-            this.dismissLoading();
-        });
+                this.dismissLoading();
+            });
+        } else {
+            this.presentLoading();
+            this.network.getDiseaseDetail(id, (data, error) => {
+                if (data) {
+                    this.detailList = data.data;
+                }
+
+                this.dismissLoading();
+            });
+        }
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad DiseaseDetailPage');
+        console.log('ionViewDidLoad InsectDetailPage');
     }
 
     presentLoading() {

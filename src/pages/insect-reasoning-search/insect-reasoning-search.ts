@@ -2,11 +2,10 @@ import {Component} from '@angular/core';
 import {AlertController, App, IonicPage, Keyboard, NavParams} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
-import {DiseaseDetailPage} from "../disease-detail/disease-detail";
-import {DiseasePlantPage} from "../disease-plant/disease-plant";
+import {InsectPlantPage} from "../insect-plant/insect-plant";
 
 /**
- * Generated class for the DiseaseSearchPage page.
+ * Generated class for the InsectReasoningSearchPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -14,12 +13,10 @@ import {DiseasePlantPage} from "../disease-plant/disease-plant";
 
 @IonicPage()
 @Component({
-    selector: 'page-disease-search',
-    templateUrl: 'disease-search.html',
+    selector: 'page-insect-reasoning-search',
+    templateUrl: 'insect-reasoning-search.html',
 })
-export class DiseaseSearchPage {
-
-    diseaseList: any = null;
+export class InsectReasoningSearchPage {
     plantList: any = null;
     hotList: any = null;
     historyList: any = [];
@@ -28,7 +25,6 @@ export class DiseaseSearchPage {
     keyword: string = null;
     infiniteScroll = null;
 
-    hasMoreDisease: boolean = true;
     hasMorePlant: boolean = true;
 
     updateHistorySql: boolean = false;
@@ -39,7 +35,7 @@ export class DiseaseSearchPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad DiseaseSearchPage');
+        console.log('ionViewDidLoad InsectReasoningSearchPage');
         this.loadHotData(true);
         this.loadHistory();
     }
@@ -83,7 +79,6 @@ export class DiseaseSearchPage {
 
     doRefresh(refresher) {
         this.currentPage = 1;
-        this.hasMoreDisease = true;
         this.hasMorePlant = true;
         if (this.infiniteScroll != null) {
             this.infiniteScroll.enable(true);
@@ -103,38 +98,8 @@ export class DiseaseSearchPage {
         }
     }
 
-    loadDiseaseData(isFirstTime) {
-        this.network.getDiseaseList(this.keyword, this.currentPage, (data, error) => {
-            if (data) {
-                if (data.data != null) {
-                    if (isFirstTime) {
-                        this.diseaseList = data;
-                    } else {
-                        for (let i = 0; i < data.data.length; i++) {
-                            this.diseaseList.data.push(data.data[i]);
-                        }
-                    }
-                } else {
-                    if (isFirstTime) {
-                        this.diseaseList = data;
-                    } else {
-                        this.hasMoreDisease = false;
-                        if (this.infiniteScroll != null && !this.hasMoreDisease && !this.hasMorePlant) {
-                            this.infiniteScroll.enable(false);
-                        }
-                    }
-                }
-
-            }
-
-            if (this.infiniteScroll != null) {
-                this.infiniteScroll.complete();
-            }
-        });
-    }
-
     loadPlantData(isFirstTime) {
-        this.network.getDiseasePlant(this.keyword, this.currentPage, (data, error) => {
+        this.network.getMuchDiseasePlant(this.keyword, this.currentPage, (data, error) => {
             if (data) {
                 if (data.data != null) {
                     if (isFirstTime) {
@@ -149,7 +114,7 @@ export class DiseaseSearchPage {
                         this.plantList = data;
                     } else {
                         this.hasMorePlant = false;
-                        if (this.infiniteScroll != null && !this.hasMoreDisease && !this.hasMorePlant) {
+                        if (this.infiniteScroll != null && !this.hasMorePlant) {
                             this.infiniteScroll.enable(false);
                         }
                     }
@@ -170,7 +135,7 @@ export class DiseaseSearchPage {
                 this.infiniteScroll.enable(true);
             }
         }
-        this.network.getDiseaseList('', this.currentPage++, (data, error) => {
+        this.network.getMuchDiseasePlant('', this.currentPage++, (data, error) => {
             if (data) {
                 if (data.data != null) {
                     if (isFirstTime) {
@@ -199,19 +164,11 @@ export class DiseaseSearchPage {
     }
 
     shouldLoadHotData(isFirstTime) {
-        if (this.diseaseList == null && this.plantList == null) {
+        if (this.plantList == null) {
             this.loadHotData(isFirstTime);
             return true;
         }
-        if (this.diseaseList != null && this.diseaseList.data == null && this.plantList == null) {
-            this.loadHotData(isFirstTime);
-            return true;
-        }
-        if (this.plantList != null && this.plantList.data == null && this.diseaseList == null) {
-            this.loadHotData(isFirstTime);
-            return true;
-        }
-        if (this.diseaseList != null && this.diseaseList.data == null && this.plantList != null && this.plantList.data == null) {
+        if (this.plantList != null && this.plantList.data == null) {
             this.loadHotData(isFirstTime);
             return true;
         }
@@ -221,19 +178,16 @@ export class DiseaseSearchPage {
     loadData(isFirstTime) {
         if (this.keyword == null || this.keyword.toString().trim() == "") {
             this.plantList = null;
-            this.diseaseList = null;
             this.loadHotData(true);
             return;
         }
         if (isFirstTime) {
             this.currentPage = 1;
-            this.hasMoreDisease = true;
             this.hasMorePlant = true;
             if (this.infiniteScroll != null) {
                 this.infiniteScroll.enable(true);
             }
         }
-        this.loadDiseaseData(isFirstTime);
         this.loadPlantData(isFirstTime);
         this.currentPage++;
     }
@@ -254,7 +208,7 @@ export class DiseaseSearchPage {
             db.executeSql('CREATE TABLE IF NOT EXISTS keywords(id INTEGER PRIMARY KEY, type INT, keyword TEXT DEFAULT 0, update_time INT DEFAULT 0, delete_time INT DEFAULT 0)', {})
                 .then(res => console.log('Executed SQL'))
                 .catch(e => console.log(e));
-            db.executeSql('SELECT * FROM keywords WHERE keyword = ? and delete_time = 0 and type = 0', [keyword])
+            db.executeSql('SELECT * FROM keywords WHERE keyword = ? and delete_time = 0 and type = 3', [keyword])
                 .then(res => {
                     if (res.rows.length != 0) {
                         let id = res.rows.item(0).id;
@@ -264,7 +218,7 @@ export class DiseaseSearchPage {
                             .catch(e => console.log(e));
                     } else {
                         let updateTime = Date.now() / 1000;
-                        db.executeSql('INSERT INTO keywords VALUES(NULL, 0, ?, ?, 0)',
+                        db.executeSql('INSERT INTO keywords VALUES(NULL, 3, ?, ?, 0)',
                             [keyword, updateTime])
                             .then(res => console.log(res))
                             .catch(e => console.log(e));
@@ -292,7 +246,7 @@ export class DiseaseSearchPage {
             db.executeSql('CREATE TABLE IF NOT EXISTS keywords(id INTEGER PRIMARY KEY, type INT, keyword TEXT DEFAULT 0, update_time INT DEFAULT 0, delete_time INT DEFAULT 0)', {})
                 .then(res => console.log('Executed SQL'))
                 .catch(e => console.log(e));
-            db.executeSql('SELECT * FROM keywords WHERE type = 0 and delete_time = 0 ORDER BY update_time DESC limit 15', {})
+            db.executeSql('SELECT * FROM keywords WHERE type = 3 and delete_time = 0 ORDER BY update_time DESC limit 15', {})
                 .then(res => {
                     this.historyList = [];
                     for (let i = 0; i < res.rows.length; i++) {
@@ -318,7 +272,7 @@ export class DiseaseSearchPage {
 
             let deleteTime = Date.now() / 1000;
             if (id == 0) {
-                db.executeSql('UPDATE keywords SET delete_time = ? where delete_time = 0 and type = 0', [deleteTime])
+                db.executeSql('UPDATE keywords SET delete_time = ? where delete_time = 0 and type = 3', [deleteTime])
                     .then(res => console.log('Executed SQL'))
                     .catch(e => console.log(e));
             } else {
@@ -342,7 +296,7 @@ export class DiseaseSearchPage {
     doDeleteHistory(id) {
         let confirm = this.alerCtrl.create({
             title: '您确定要删除吗？',
-            message: '您确定删除'+ (id == 0 ? '所有' : '这条') +'历史记录吗？确定点击是，不确定点击否。',
+            message: '您确定删除' + (id == 0 ? '所有' : '这条') + '历史记录吗？确定点击是，不确定点击否。',
             buttons: [
                 {
                     text: '否',
@@ -361,19 +315,9 @@ export class DiseaseSearchPage {
         confirm.present();
     }
 
-    jumpToDetail(id, isFromHotsearch) {
-        if (!isFromHotsearch) {
-            this.setHistory(this.keyword);
-        }
-        this.app.getRootNavs()[0].push(DiseaseDetailPage,
-            {
-                id:id
-            });
-    }
-
-    jumpToDiseasePlant(id) {
+    jumpToInsectPlant(id) {
         this.setHistory(this.keyword);
-        this.app.getRootNavs()[0].push(DiseasePlantPage,
+        this.app.getRootNavs()[0].push(InsectPlantPage,
             {
                 id: id
             });

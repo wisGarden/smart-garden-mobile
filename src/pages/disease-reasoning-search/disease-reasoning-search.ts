@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import {AlertController, App, IonicPage, Keyboard, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {AlertController, App, IonicPage, Keyboard, NavParams} from 'ionic-angular';
 import {DiseasePlantPage} from "../disease-plant/disease-plant";
-import {DiseaseDetailPage} from "../disease-detail/disease-detail";
 import {GlobalProvider} from "../../providers/global/global";
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 
@@ -14,8 +13,8 @@ import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 
 @IonicPage()
 @Component({
-  selector: 'page-disease-reasoning-search',
-  templateUrl: 'disease-reasoning-search.html',
+    selector: 'page-disease-reasoning-search',
+    templateUrl: 'disease-reasoning-search.html',
 })
 export class DiseaseReasoningSearchPage {
 
@@ -37,7 +36,7 @@ export class DiseaseReasoningSearchPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad DiseaseSearchPage');
+        console.log('ionViewDidLoad DiseaseReasoningSearchPage');
         this.loadHotData(true);
         this.loadHistory();
     }
@@ -298,7 +297,7 @@ export class DiseaseReasoningSearchPage {
     doDeleteHistory(id) {
         let confirm = this.alerCtrl.create({
             title: '您确定要删除吗？',
-            message: '您确定删除'+ (id == 0 ? '所有' : '这条') +'历史记录吗？确定点击是，不确定点击否。',
+            message: '您确定删除' + (id == 0 ? '所有' : '这条') + '历史记录吗？确定点击是，不确定点击否。',
             buttons: [
                 {
                     text: '否',
@@ -319,7 +318,7 @@ export class DiseaseReasoningSearchPage {
 
     jumpToDiseasePlant(id) {
         this.setHistory(this.keyword);
-        this.app.getRootNav().push(DiseasePlantPage,
+        this.app.getRootNavs()[0].push(DiseasePlantPage,
             {
                 id: id
             });

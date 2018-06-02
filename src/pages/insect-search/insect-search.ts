@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 import {AlertController, App, IonicPage, Keyboard, NavParams} from 'ionic-angular';
-import {DiseaseDetailPage} from "../disease-detail/disease-detail";
-import {DiseasePlantPage} from "../disease-plant/disease-plant";
 import {GlobalProvider} from "../../providers/global/global";
 import {SQLite, SQLiteObject} from "@ionic-native/sqlite";
 import {InsectDetailPage} from "../insect-detail/insect-detail";
@@ -41,7 +39,7 @@ export class InsectSearchPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad DiseaseSearchPage');
+        console.log('ionViewDidLoad InsectSearchPage');
         this.loadHotData(true);
         this.loadHistory();
     }
@@ -367,7 +365,7 @@ export class InsectSearchPage {
         if (!isFromHotsearch) {
             this.setHistory(this.keyword);
         }
-        this.app.getRootNav().push(InsectDetailPage,
+        this.app.getRootNavs()[0].push(InsectDetailPage,
             {
                 id:id
             });
@@ -375,7 +373,7 @@ export class InsectSearchPage {
 
     jumpToDiseasePlant(id) {
         this.setHistory(this.keyword);
-        this.app.getRootNav().push(InsectPlantPage,
+        this.app.getRootNavs()[0].push(InsectPlantPage,
             {
                 id: id
             });

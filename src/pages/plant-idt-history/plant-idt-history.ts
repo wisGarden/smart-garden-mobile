@@ -27,7 +27,7 @@ export class PlantIdtHistoryPage {
     }
 
     jumpToDetail(plant) {
-        this.app.getRootNav().push(PlantDetailPage,
+        this.app.getRootNavs()[0].push(PlantDetailPage,
             {
                 data: plant,
                 index: 0

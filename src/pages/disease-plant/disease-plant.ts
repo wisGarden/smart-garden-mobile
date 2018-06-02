@@ -118,13 +118,13 @@ export class DiseasePlantPage {
     }
 
     jumpToDetail(id) {
-        this.app.getRootNav().push(DiseaseDetailPage, {
+        this.app.getRootNavs()[0].push(DiseaseDetailPage, {
             id: id
         });
     }
 
     jumpToDiseaseReasoning() {
-        this.app.getRootNav().push(DiseaseReasoningPage, {
+        this.app.getRootNavs()[0].push(DiseaseReasoningPage, {
             plantId: this.id,
             plantName: this.plantData.plantName,
             type: 0

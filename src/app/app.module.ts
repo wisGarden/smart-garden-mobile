@@ -35,6 +35,8 @@ import {InsectDetailPage} from "../pages/insect-detail/insect-detail";
 import {InsectPlantPage} from "../pages/insect-plant/insect-plant";
 import {DiseaseReasoningPage} from "../pages/disease-reasoning/disease-reasoning";
 import {DiseaseReasoningSearchPage} from "../pages/disease-reasoning-search/disease-reasoning-search";
+import {InsectReasoningPage} from "../pages/insect-reasoning/insect-reasoning";
+import {InsectReasoningSearchPage} from "../pages/insect-reasoning-search/insect-reasoning-search";
 
 @NgModule({
     declarations: [
@@ -59,7 +61,9 @@ import {DiseaseReasoningSearchPage} from "../pages/disease-reasoning-search/dise
         InsectDetailPage,
         InsectPlantPage,
         DiseaseReasoningPage,
-        DiseaseReasoningSearchPage
+        DiseaseReasoningSearchPage,
+        InsectReasoningPage,
+        InsectReasoningSearchPage
     ],
     imports: [
         BrowserModule,
@@ -93,7 +97,9 @@ import {DiseaseReasoningSearchPage} from "../pages/disease-reasoning-search/dise
         InsectDetailPage,
         InsectPlantPage,
         DiseaseReasoningPage,
-        DiseaseReasoningSearchPage
+        DiseaseReasoningSearchPage,
+        InsectReasoningPage,
+        InsectReasoningSearchPage
     ],
     providers: [
         StatusBar,

@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 
 import {HomePage} from '../home/home';
-import {PlantListPage} from "../plant-list/plant-list";
 import {App, Platform} from "ionic-angular";
 import {Toast} from "@ionic-native/toast";
 import {FindPage} from "../find/find";
@@ -14,7 +13,6 @@ export class TabsPage {
 
     public backButtonPressed: boolean = false;
 
-    // tab1Root = PlantListPage;
     tab1Root = HomePage;
     tab2Root = FindPage;
     tab3Root = MinePage;
@@ -42,7 +40,7 @@ export class TabsPage {
     ionViewWillLeave() {
         this.platform.ready().then(() => {
             this.platform.registerBackButtonAction(() => {
-                this.app.getRootNav().pop();
+                this.app.getRootNavs()[0].pop();
             });
         });
     }

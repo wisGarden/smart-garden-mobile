@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {App, IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {PlantDetailPage} from "../plant-detail/plant-detail";
-import {Toast} from "@ionic-native/toast";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {AndroidPermissions} from "@ionic-native/android-permissions";
 import {GlobalProvider} from "../../providers/global/global";
@@ -31,11 +30,11 @@ export class PlantIdtAlbumPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad PlantIdtPhotoPage');
+        console.log('ionViewDidLoad PlantIdtAlbumPage');
     }
 
     jumpToDetail() {
-        this.app.getRootNav().push(PlantDetailPage,
+        this.app.getRootNavs()[0].push(PlantDetailPage,
             {
                 data: this.data,
                 imageData: this.imageData,

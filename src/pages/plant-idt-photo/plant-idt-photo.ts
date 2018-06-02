@@ -34,7 +34,7 @@ export class PlantIdtPhotoPage {
     }
 
     jumpToDetail() {
-        this.app.getRootNav().push(PlantDetailPage,
+        this.app.getRootNavs()[0].push(PlantDetailPage,
             {
                 data: this.data,
                 index: 0

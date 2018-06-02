@@ -4,6 +4,7 @@ import {PlantIdtTabsPage} from "../plant-idt-tabs/plant-idt-tabs";
 import {DiseaseSearchPage} from "../disease-search/disease-search";
 import {InsectSearchPage} from "../insect-search/insect-search";
 import {DiseaseReasoningSearchPage} from "../disease-reasoning-search/disease-reasoning-search";
+import {InsectReasoningSearchPage} from "../insect-reasoning-search/insect-reasoning-search";
 
 @Component({
     selector: 'page-home',
@@ -18,18 +19,22 @@ export class HomePage {
     }
 
     pushToPlantIdt() {
-        this.app.getRootNav().push(PlantIdtTabsPage);
+        this.app.getRootNavs()[0].push(PlantIdtTabsPage);
     }
 
     pushToDiseaseSearch() {
-        this.app.getRootNav().push(DiseaseSearchPage);
+        this.app.getRootNavs()[0].push(DiseaseSearchPage);
     }
 
     pushToInsectSearch() {
-        this.app.getRootNav().push(InsectSearchPage);
+        this.app.getRootNavs()[0].push(InsectSearchPage);
     }
 
     pushToDiseaseReasoningSearch() {
-        this.app.getRootNav().push(DiseaseReasoningSearchPage);
+        this.app.getRootNavs()[0].push(DiseaseReasoningSearchPage);
+    }
+
+    pushToInsectReasoningSearch() {
+        this.app.getRootNavs()[0].push(InsectReasoningSearchPage);
     }
 }

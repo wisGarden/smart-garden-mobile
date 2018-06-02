@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {App, IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
-import {DiseaseDetailPage} from "../disease-detail/disease-detail";
+import {App, IonicPage, Loading, LoadingController, NavParams} from 'ionic-angular';
 import {GlobalProvider} from "../../providers/global/global";
 import {InsectDetailPage} from "../insect-detail/insect-detail";
+import {InsectReasoningPage} from "../insect-reasoning/insect-reasoning";
 
 /**
  * Generated class for the InsectPlantPage page.
@@ -48,7 +48,7 @@ export class InsectPlantPage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad DiseasePlantPage');
+        console.log('ionViewDidLoad InsectPlantPage');
     }
 
     presentLoading() {
@@ -118,8 +118,16 @@ export class InsectPlantPage {
     }
 
     jumpToDetail(id) {
-        this.app.getRootNav().push(InsectDetailPage, {
+        this.app.getRootNavs()[0].push(InsectDetailPage, {
             id: id
+        });
+    }
+
+    jumpToInsectReasoning() {
+        this.app.getRootNavs()[0].push(InsectReasoningPage, {
+            plantId: this.id,
+            plantName: this.plantData.plantName,
+            type: 1
         });
     }
 }
