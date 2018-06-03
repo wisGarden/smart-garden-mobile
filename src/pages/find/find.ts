@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {App, IonicPage, NavParams} from 'ionic-angular';
+import {PlantListPage} from "../plant-list/plant-list";
 
 /**
  * Generated class for the FindPage page.
@@ -15,11 +16,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FindPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public app: App, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FindPage');
   }
 
+  jumpToPlantList() {
+      this.app.getRootNavs()[0].push(PlantListPage);
+  }
 }

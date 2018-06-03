@@ -3,8 +3,8 @@
 
 <ion-content class="margin-top-3">
     <div style="text-align: center">
-        <img class="blur pic-background" src="{{plantDetail?.data?.images[0]}}" *ngIf="plantDetail?.data?.images[0] != null">
-        <img class="pic" src="{{plantDetail?.data?.images[0]}}" *ngIf="plantDetail?.data?.images[0] != null">
+        <img class="blur pic-background" src="{{getImageUrl(plantDetail?.data?.images[0])}}">
+        <img class="pic" src="{{getImageUrl(plantDetail?.data?.images[0])}}">
         <button class="label-title">{{plantDetail?.data?.nameStd}}</button>
     </div>
     <div class="padding-vertical article">
@@ -16,11 +16,11 @@
             </tr>
             <tr *ngIf="plantDetail?.data?.nameLt != ''">
                 <th><b>拉丁文名:</b></th>
-                <th>{{plantDetail?.data?.nameLt}}</th>
+                <th>&nbsp;&nbsp;{{plantDetail?.data?.nameLt}}</th>
             </tr>
             <tr>
-                <th><b>科属:</b></th>
-                <th>{{plantDetail?.data?.familyCn}}&nbsp;{{plantDetail?.data?.genusCn}}</th>
+                <th><b>科&#12288;&#12288;属:</b></th>
+                <th>&nbsp;&nbsp;{{plantDetail?.data?.familyCn}}&nbsp;{{plantDetail?.data?.genusCn}}</th>
             </tr>
         </table>
         <div *ngIf="plantDetail?.data?.info?.xgsc != ''">
@@ -48,20 +48,23 @@
             <p class="subcontent">{{plantDetail?.data?.info?.hksj}}</p>
         </div>
 
-        <div class="history-title-line"></div>
-        <p class="history-title"><span><b>相 关 推 荐</b></span></p>
 
-        <ion-grid class="grid">
-            <ion-row justify-content-start>
-                <ion-col col-4 *ngFor="let item of data?.data;let i = index">
-                    <img src="{{item?.imageUrl}}" (click)="jumpToOtherPlant(i)" *ngIf="item?.name != plantDetail?.data?.nameStd; else elseBlock;">
-                    <ng-template #elseBlock>
-                        <img src="{{item?.imageUrl}}">
-                    </ng-template>
-                    <label>{{item?.name}}</label>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+        <div *ngIf="data != null">
+            <div class="history-title-line"></div>
+            <p class="history-title"><span><b>相 关 推 荐</b></span></p>
+
+            <ion-grid class="grid">
+                <ion-row justify-content-start>
+                    <ion-col col-4 *ngFor="let item of data?.data;let i = index">
+                        <img src="{{item?.imageUrl}}" (click)="jumpToOtherPlant(i)" *ngIf="item?.name != plantDetail?.data?.nameStd; else elseBlock;">
+                        <ng-template #elseBlock>
+                            <img src="{{item?.imageUrl}}">
+                        </ng-template>
+                        <label>{{item?.name}}</label>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
 
         <div class="history-title-line"></div>
         <p class="history-title"><span><b>供 应 商 家</b></span></p>

@@ -50,7 +50,7 @@ export class DiseaseReasoningPage {
         this.loadData(true);
     }
 
-    ionViewDidEnter() {
+    ionViewWillEnter() {
         this.platform.ready().then(() => {
             this.platform.registerBackButtonAction(() => {
                 if (this.currentPage != 1) {

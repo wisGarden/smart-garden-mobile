@@ -1,29 +1,88 @@
-<!--
-  Generated template for the PlantListPage page.
+<title-bar pageTitle="植物大全" startIconName="md-close" searchIconName="" endIconName="" isSearch="true"></title-bar>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<title-bar pageTitle="植物大全" isSearch></title-bar>
+<ion-content class="margin-top-3">
+    <div class="searchbar-div">
+        <ion-searchbar id="searchbar" (ionInput)="getItems($event)" placeholder="试试输个植物"
+                       (keyup)="onSearchKeyUp($event)" [(ngModel)]="keyword"></ion-searchbar>
+    </div>
+    <div *ngIf="keyword == null || keyword.toString().trim() == ''">
+        <ng-template #historyTemplate>
+            <div class="history-title-line"></div>
+            <p class="history-title"><span>搜索历史</span></p>
+            <div class="history">
+                <span *ngFor="let item of historyList" (click)="historySearch(item?.keyword)"
+                      (press)="doDeleteHistory(item?.id)">{{item?.keyword}}</span>
+                <span class="delete" (click)="doDeleteHistory(0)">X</span>
+            </div>
+        </ng-template>
+        <div *ngIf="historyList.length == 0; else historyTemplate">
+            <div class="history-title-line"></div>
+            <p class="history-title"><img src="assets/imgs/icon-sad-light-gray.png" class="history-img"><span>&nbsp;无搜索历史</span>
+            </p>
+        </div>
+        <div class="nav-top">
+            <span class="my-active" id="nav1" (click)="currentPage != 1 ? jumpToPage(1) : null">植物分类</span>
+            <span *ngIf="currentPage >= 2" (click)="currentPage != 2 ? jumpToPage(2) : null">
+            <span class="my-arrow">&nbsp;&nbsp;>&nbsp;&nbsp;</span><span id="nav2">{{navList[0]}}</span>
+        </span>
+            <span *ngIf="currentPage >= 3">
+            <span class="my-arrow">&nbsp;&nbsp;>&nbsp;&nbsp;</span><span id="nav3">{{navList[1]}}</span>
+        </span>
+        </div>
+        <ion-list class="margin-bottom-3" no-lines *ngIf="currentPage <= 2">
+            <button class="list-item" ion-item *ngFor="let item of fgList[currentPage - 1]"
+                    (click)="next(currentPage == 1 ? item?.family : item?.genus)">
+                <span *ngIf="currentPage == 1">{{item?.family}}({{item?.number}})</span>
+                <span *ngIf="currentPage == 2">{{item?.genus}}({{item?.number}})</span>
+            </button>
+        </ion-list>
+        <ion-grid class="margin-bottom-3" *ngIf="currentPage == 3">
+            <ion-row>
+                <ion-col class="plant" col-6 *ngFor="let plant of fgList[currentPage - 1]">
+                    <ion-card (click)="jumpToDetail(plant?.id)">
+                        <img class="list-img" src="{{getImageUrl(plant?.imageUrl)}}"/>
+                        <div class="card-title">{{plant?.plantName}}</div>
+                        <div class="card-subtitle">{{plant?.plantDescription}}</div>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
 
-<ion-content>
-    <ion-grid class="margin-top-3">
-        <ion-row>
-            <ion-col class="plant" col-6>
-                <ion-card>
-                    <img src="assets/imgs/1.png"/>
-                    <div>草本花卉</div>
-                    <div class="card-subtitle">997</div>
-                </ion-card>
-            </ion-col>
-            <ion-col class="plant" col-6>
-                <ion-card>
-                    <img src="assets/imgs/1.png"/>
-                    <div>草本花卉</div>
-                    <div class="card-subtitle">997</div>
-                </ion-card>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
+    <div *ngIf="keyword != null && keyword.toString().trim() != ''">
+        <ng-template #listTemplate>
+            <div>
+                <div class="history-title-line"></div>
+                <p class="history-title"><img src="assets/imgs/icon-sad-light-gray.png"
+                                              class="history-img"><span>&nbsp;没有查找到内容</span></p>
+            </div>
+        </ng-template>
+        <div *ngIf="plantList.length != 0; else listTemplate">
+            <div class="history-title-line"></div>
+            <p class="history-title"><span>搜索结果</span></p>
+            <ion-item class="margin-bottom-3">
+                <div class="card" *ngFor="let item of plantList;" (click)="jumpToDetail(item?.id)">
+                    <ion-card>
+                        <ion-row>
+                            <ion-col col-4><img src="{{getImageUrl(item?.imageUrl)}}" class="card-img">
+                            </ion-col>
+                            <ion-col class="card-main" col-8 ion-item>
+                                <div class="card-margin-bottom-8">{{item?.name}}</div>
+                                <p class="card-margin-bottom-8 card-description"
+                                   [innerHTML]="replaceAll(item?.description)"></p>
+                                <p>{{item?.family}}{{item?.genus}}</p>
+                            </ion-col>
+                        </ion-row>
+                        <div class="line"></div>
+                    </ion-card>
+                </div>
+            </ion-item>
+        </div>
+    </div>
 
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

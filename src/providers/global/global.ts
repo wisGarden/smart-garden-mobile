@@ -19,6 +19,10 @@ const PLANT_DESCRIPTION = "getPlantDescription";
 const FIRST_DISEASE_QUESTION = "getFirstDiseaseQuestion";
 const DISEASE_QUESTION = "getDiseaseQuestion";
 const GET_DISEASE_BY_OPTION_ID = "getDiseaseByOptionId";
+const GET_FAMILY = "getFamily";
+const GET_GENUS = "getGenus";
+const GET_PLANTS_BY_GENUS = "getPlantsByGenus";
+const GET_PLANT_BY_ID = "getPlantById";
 const TEST = "testtest";
 
 @Injectable()
@@ -212,6 +216,38 @@ export class GlobalProvider {
      */
     getDiseaseByOptionId(id, callback) {
         this.GET(BASEURL + GET_DISEASE_BY_OPTION_ID, {id: id}, callback);
+    }
+
+    // const GET_FAMILY = "getFamily";
+    // const GET_GENUS = "getGenus";
+    // const GET_PLANTS_BY_GENUS = "getPlantsByGenus";
+    // const GET_PLANT_BY_ID = "getPlantById";
+    /**
+     * 获取植物科与数量
+     */
+    getFamily(page, callback) {
+        this.GET(BASEURL + GET_FAMILY, {page: page}, callback);
+    }
+
+    /**
+     * 根据科获取植物属与数量
+     */
+    getGenus(family, page, callback) {
+        this.GET(BASEURL + GET_GENUS, {family: family, page: page}, callback);
+    }
+
+    /**
+     * 根据属获取植物列表
+     */
+    getPlantsByGenus(genus, page, callback) {
+        this.GET(BASEURL + GET_PLANTS_BY_GENUS, {genus: genus, page: page}, callback);
+    }
+
+    /**
+     * 根据id获取植物详情
+     */
+    getPlantById(id, callback) {
+        this.GET(BASEURL + GET_PLANT_BY_ID, {id: id}, callback);
     }
 
     // Dumplicate

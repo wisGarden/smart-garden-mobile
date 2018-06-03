@@ -29,7 +29,7 @@ export class TabsPage {
         });
     }
 
-    ionViewDidEnter() {
+    ionViewWillEnter() {
         this.platform.ready().then(() => {
             this.platform.registerBackButtonAction(() => {
                 this.showExit();

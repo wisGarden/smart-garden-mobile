@@ -38,7 +38,7 @@ export class PlantIdtHistoryPage {
         console.log('ionViewDidLoad PlantIdtHistoryPage');
     }
 
-    ionViewDidEnter() {
+    ionViewWillEnter() {
         this.loadData(true);
     }
 

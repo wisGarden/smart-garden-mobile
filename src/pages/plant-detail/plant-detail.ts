@@ -17,9 +17,10 @@ import {Toast} from "@ionic-native/toast";
 })
 export class PlantDetailPage {
     private loading: Loading;
-    data: Object;
-    index: 0;
-    plantDetail: Object;
+    data: any = null;
+    index:number = 0;
+    id;
+    plantDetail: any;
     showLoading: boolean = true;
 
     @ViewChild(Content) content: Content;
@@ -31,20 +32,33 @@ export class PlantDetailPage {
 
         this.data = this.navParams.data.data;
 
-        if (this.data.hasOwnProperty("data") && this.data['data'].length > 0) {
-            if (this.data['data'][this.index].hasOwnProperty("infoUrl")) {
-                this.network.getPlant(this.data['data'][this.index]['infoUrl'], (data, error) => {
-                    if (data) {
-                        this.plantDetail = data;
+        if (this.index == null && this.data == null) {
+            this.id = this.navParams.data.id;
+            this.network.getPlantById(this.id, (data, error) => {
+                if (data) {
+                    this.plantDetail = data;
+                }
+                if (this.showLoading) {
+                    this.dismissLoading();
+                    this.showLoading = false;
+                }
+            });
+        } else {
+            if (this.data.hasOwnProperty("data") && this.data['data'].length > 0) {
+                if (this.data['data'][this.index].hasOwnProperty("infoUrl")) {
+                    this.network.getPlant(this.data['data'][this.index]['infoUrl'], (data, error) => {
+                        if (data) {
+                            this.plantDetail = data;
+                        }
                         if (this.showLoading) {
                             this.dismissLoading();
                             this.showLoading = false;
                         }
-                    }
-                });
+                    });
+                }
+            } else {
+                this.toast.showShortCenter("没有相关植物信息").subscribe();
             }
-        } else {
-            this.toast.showShortCenter("没有相关植物信息").subscribe();
         }
     }
 
@@ -91,6 +105,17 @@ export class PlantDetailPage {
         if (this.loading != null) {
             this.loading.dismiss();
             this.loading = null;
+        }
+    }
+
+    getImageUrl(imageUrls) {
+        if (imageUrls == null || imageUrls.trim() == '') {
+            return "assets/imgs/img-default.jpg";
+        }
+        if (!imageUrls.split("#")[0].match("http")) {
+            return this.network.getBaseUrl() + imageUrls.split("#")[0];
+        } else {
+            return imageUrls.split("#")[0];
         }
     }
 }
