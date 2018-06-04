@@ -35,7 +35,7 @@ export class InsectSearchPage {
 
     constructor(public app: App, public navParams: NavParams,
                 public keyboard: Keyboard, public network: GlobalProvider,
-                public sqlite: SQLite, public alerCtrl: AlertController) {
+                public sqlite: SQLite, public alertCtrl: AlertController) {
     }
 
     ionViewDidLoad() {
@@ -340,7 +340,7 @@ export class InsectSearchPage {
     }
 
     doDeleteHistory(id) {
-        let confirm = this.alerCtrl.create({
+        let confirm = this.alertCtrl.create({
             title: '您确定要删除吗？',
             message: '您确定删除' + (id == 0 ? '所有' : '这条') + '历史记录吗？确定点击是，不确定点击否。',
             buttons: [

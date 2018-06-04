@@ -1,0 +1,20 @@
+<ion-content padding class="game-back">
+    <div class="game-center">
+        <p text-center class="game-title">
+            你的得分
+        </p>
+        <p text-center class="game-score">
+            {{rightNum * PER_SCORE}}
+        </p>
+        <p text-center class="game-text">
+            一共答对了{{rightNum}}道题，<br>获得成就<span style="color: #EE6245;font-size: 22px;font-weight: bold;">&nbsp;"{{achievement}}"</span><br>再接再厉哦！
+        </p>
+    </div>
+
+</ion-content>
+<ion-footer>
+    <div padding class="game-bottom">
+        <button class="game-button margin-right-23" (click)="jumpToMainGame()">返回主页</button>
+        <button class="game-button" (click)="jumpToReTry()">再来一次</button>
+    </div>
+</ion-footer>

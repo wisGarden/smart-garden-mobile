@@ -1,0 +1,25 @@
+<ion-content padding class="game-back">
+    <p text-center class="game-title">
+        识花大挑战
+    </p>
+    <div text-center>
+        <button class="game-option" (click)="jumpToDoing(1)">
+            练习模式
+        </button>
+    </div>
+    <div text-center class="margin">
+        <button class="game-option" (click)="jumpToDoing(2)">
+            挑战模式
+        </button>
+    </div>
+    <div text-center class="margin">
+        <button class="game-option" (click)="jumpToDoing(3)">
+            极限模式
+        </button>
+    </div>
+</ion-content>
+<ion-footer>
+    <div class="footer-bottom">
+        <button class="exit" (click)="jumpToMainPage()">退出</button>
+    </div>
+</ion-footer>

@@ -1,0 +1,48 @@
+<ion-content padding class="game-back">
+    <div class="top-div-height">
+        <button class="top-button-left" (click)="previous()" *ngIf="current_ques_id > 1 && type ==1">上一题</button>
+        <span class="checkpoint">第<span class="text-white">&nbsp;{{current_ques_id}}&nbsp;</span>关</span>
+        <button *ngIf="type == 1" class="top-button-right" (click)="next()">下一题</button>
+    </div>
+    <div text-center class="margin-top-10">
+        <img src="{{getImageUrl(question?.questionImage)}}" class="top-img">
+    </div>
+    <div class="margin-bottom-3">
+        <div text-center class="margin-top-9">
+            <span class="option-normal" (click)="getNextQuestion(0, type == 1)">
+                <button id="option-a" class="game-option">
+                {{question?.optionA}}
+                </button>
+            </span>
+        </div>
+        <div text-center class="margin-top-9">
+            <span class="option-normal" (click)="getNextQuestion(1, type == 1)">
+                <button id="option-b" class="game-option">
+                {{question?.optionB}}
+                </button>
+            </span>
+        </div>
+        <div text-center class="margin-top-9">
+            <span class="option-normal" (click)="getNextQuestion(2, type == 1)">
+                <button id="option-c" class="game-option">
+                {{question?.optionC}}
+                </button>
+            </span>
+        </div>
+        <div text-center class="margin-top-9">
+            <span class="option-normal" (click)="getNextQuestion(3, type == 1)">
+                <button id="option-d" class="game-option">
+                {{question?.optionD}}
+                </button>
+            </span>
+        </div>
+    </div>
+
+</ion-content>
+<ion-footer>
+    <div class="footer-bottom">
+        <img id="rotate" class="rotate-circle" src="assets/imgs/interval.png" width="30px" *ngIf="type == 3">
+        <span id="number" class="number" *ngIf="type == 3">{{current_num}}</span>
+        <button class="exit" (click)="jumpToResult()">退出</button>
+    </div>
+</ion-footer>

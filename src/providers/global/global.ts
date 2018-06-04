@@ -23,6 +23,8 @@ const GET_FAMILY = "getFamily";
 const GET_GENUS = "getGenus";
 const GET_PLANTS_BY_GENUS = "getPlantsByGenus";
 const GET_PLANT_BY_ID = "getPlantById";
+const GET_QUESTION_IDS = "getQuestionIds";
+const GET_QUESTION_BY_ID = "getQuestionById";
 const TEST = "testtest";
 
 @Injectable()
@@ -248,6 +250,20 @@ export class GlobalProvider {
      */
     getPlantById(id, callback) {
         this.GET(BASEURL + GET_PLANT_BY_ID, {id: id}, callback);
+    }
+
+    /**
+     * 分页获取题目id
+     */
+    getQuestionIds(page, callback) {
+        this.GET(BASEURL + GET_QUESTION_IDS, {page: page}, callback);
+    }
+
+    /**
+     * 根据id获取题目信息
+     */
+    getQuestionById(id, callback) {
+        this.GET(BASEURL + GET_QUESTION_BY_ID, {id: id}, callback);
     }
 
     // Dumplicate

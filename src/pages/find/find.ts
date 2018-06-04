@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {App, IonicPage, NavParams} from 'ionic-angular';
 import {PlantListPage} from "../plant-list/plant-list";
+import {GameMainPage} from "../game-main/game-main";
 
 /**
  * Generated class for the FindPage page.
@@ -25,5 +26,9 @@ export class FindPage {
 
   jumpToPlantList() {
       this.app.getRootNavs()[0].push(PlantListPage);
+  }
+
+  jumpToGame() {
+      this.app.getRootNavs()[0].push(GameMainPage);
   }
 }
