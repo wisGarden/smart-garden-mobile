@@ -40,6 +40,10 @@ import {InsectReasoningSearchPage} from "../pages/insect-reasoning-search/insect
 import {GameMainPage} from "../pages/game-main/game-main";
 import {GameDoingPage} from "../pages/game-doing/game-doing";
 import {GameResultPage} from "../pages/game-result/game-result";
+import {SceneryMainPage} from "../pages/scenery-main/scenery-main";
+import {Geolocation} from "@ionic-native/geolocation";
+import {SceneryDetailPage} from "../pages/scenery-detail/scenery-detail";
+import {SceneryListPage} from "../pages/scenery-list/scenery-list";
 
 @NgModule({
     declarations: [
@@ -69,7 +73,10 @@ import {GameResultPage} from "../pages/game-result/game-result";
         InsectReasoningSearchPage,
         GameMainPage,
         GameDoingPage,
-        GameResultPage
+        GameResultPage,
+        SceneryMainPage,
+        SceneryDetailPage,
+        SceneryListPage
     ],
     imports: [
         BrowserModule,
@@ -108,7 +115,10 @@ import {GameResultPage} from "../pages/game-result/game-result";
         InsectReasoningSearchPage,
         GameMainPage,
         GameDoingPage,
-        GameResultPage
+        GameResultPage,
+        SceneryMainPage,
+        SceneryDetailPage,
+        SceneryListPage
     ],
     providers: [
         StatusBar,
@@ -118,7 +128,8 @@ import {GameResultPage} from "../pages/game-result/game-result";
         AndroidPermissions,
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         GlobalProvider,
-        SQLite
+        SQLite,
+        Geolocation
     ]
 })
 export class AppModule {

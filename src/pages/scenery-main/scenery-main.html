@@ -1,0 +1,22 @@
+<title-bar pageTitle="景区介绍" startIconName="arrow-back" searchIconName="" endIconName=""
+           isSearch="true"></title-bar>
+
+<ion-content class="margin-top-3">
+    <div class="searchbar-div">
+        <ion-searchbar id="searchbar" (ionInput)="getItems($event)" placeholder="请输入景区名称"
+                       (keyup)="onSearchKeyUp($event)" [(ngModel)]="keyword"></ion-searchbar>
+    </div>
+    <ion-select class="select" [(ngModel)]="province" okText="确定" cancelText="取消" (ngModelChange)="change($event)" (click)="selectClicked()">
+        <ion-option *ngFor="let item of network.getProvince()" value="{{item?.name}}">{{item?.name}}</ion-option>
+    </ion-select>
+    <div #map_container class="map_container"></div>
+</ion-content>
+<ion-footer>
+    <span class="reset" (click)="resetToPosition()"></span>
+    <ion-grid class="bottom-back">
+        <ion-row>
+            <ion-col col-6 text-center class="border-right text-blue"><img src="assets/imgs/icon-map-view-choose.png" class="bottom-img">地图视图</ion-col>
+            <ion-col col-6 text-center (click)="jumpToList()"><img src="assets/imgs/icon-list-view.png" class="bottom-img">列表视图</ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

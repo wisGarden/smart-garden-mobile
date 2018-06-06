@@ -18,6 +18,11 @@ export class TitleBarComponent {
     @Input() endIconName: string;
     @Input() isSearch: string;
 
+    // 专为scenery-list后退设计使用
+    @Input() callback: any = null;
+    @Input() keyword: any = null;
+    @Input() province: any = null;
+
     constructor(public app:App, public navCtrl: NavController) {
         this.pageTitle = '植物大全';
         this.startIconName = 'close';
@@ -27,7 +32,13 @@ export class TitleBarComponent {
 
     backClick() {
         if (this.startIconName == "arrow-back" || this.startIconName == "md-close") {
-            this.app.getRootNavs()[0].pop();
+            if (this.callback != null) {
+                this.callback(this.keyword, this.province).then(() => {
+                    this.app.getRootNavs()[0].pop();
+                });
+            } else {
+                this.app.getRootNavs()[0].pop();
+            }
         }
     }
 

@@ -25,12 +25,19 @@ const GET_PLANTS_BY_GENUS = "getPlantsByGenus";
 const GET_PLANT_BY_ID = "getPlantById";
 const GET_QUESTION_IDS = "getQuestionIds";
 const GET_QUESTION_BY_ID = "getQuestionById";
+const GET_SCENERY = "getScenery";
 const TEST = "testtest";
+
+const PROVINCE_IDS = [{"id":"25","name":"上海"},{"id":"16","name":"江苏"},{"id":"31","name":"浙江"},{"id":"2","name":"安徽"},{"id":"17","name":"江西"},{"id":"6","name":"广东"},{"id":"4","name":"福建"},{"id":"7","name":"广西"},{"id":"9","name":"海南"},{"id":"3","name":"北京"},{"id":"27","name":"天津"},{"id":"10","name":"河北"},{"id":"22","name":"山东"},{"id":"11","name":"河南"},{"id":"23","name":"山西"},{"id":"19","name":"内蒙古"},{"id":"26","name":"四川"},{"id":"32","name":"重庆"},{"id":"8","name":"贵州"},{"id":"30","name":"云南"},{"id":"28","name":"西藏"},{"id":"24","name":"陕西"},{"id":"5","name":"甘肃"},{"id":"29","name":"新疆"},{"id":"21","name":"青海"},{"id":"20","name":"宁夏"},{"id":"12","name":"黑龙江"},{"id":"15","name":"吉林"},{"id":"18","name":"辽宁"},{"id":"33","name":"香港"},{"id":"34","name":"澳门"},{"id":"35","name":"台湾"},{"id":"14","name":"湖南"},{"id":"13","name":"湖北"}];
 
 @Injectable()
 export class GlobalProvider {
     public getBaseUrl() {
         return BASEURL;
+    }
+
+    public getProvince() {
+        return PROVINCE_IDS;
     }
 
     constructor(public http: HttpClient, public toast: Toast) {
@@ -264,6 +271,13 @@ export class GlobalProvider {
      */
     getQuestionById(id, callback) {
         this.GET(BASEURL + GET_QUESTION_BY_ID, {id: id}, callback);
+    }
+
+    /**
+     * 获取景区列表
+     */
+    getScenery(keyword, page, proId, callback) {
+        this.GET(BASEURL + GET_SCENERY, {keyword, page, proId}, callback);
     }
 
     // Dumplicate

@@ -1,0 +1,36 @@
+<title-bar pageTitle="景区介绍" startIconName="arrow-back" searchIconName="" endIconName=""
+           isSearch="true"></title-bar>
+
+<ion-content class="margin-top-3">
+    <div class="body-padding">
+        <p class="big-title"><b>{{sceneryData?.name}}</b></p>
+        <p class="my-content" *ngIf="sceneryData?.star != null">{{sceneryData?.star}}级景点</p>
+    </div>
+    <ion-slides [pager]="true" style="height: 200px;" *ngIf="sceneryData?.pics != null && sceneryData?.pics.length != 0">
+        <ion-slide *ngFor="let pic of sceneryData?.pics">
+            <img src="{{getImageUrl(pic?.picUrl)}}">
+        </ion-slide>
+    </ion-slides>
+    <div class="body-padding margin-bottom-3">
+        <div class="border" *ngIf="sceneryData?.openTime != null">
+            <p class="subtitle"><b>开放时间</b></p>
+            <p class="my-content" [innerHTML]="sceneryData?.openTime"></p>
+        </div>
+        <div class="border" *ngIf="sceneryData?.address != null">
+            <p class="subtitle"><b>地址</b></p>
+            <p class="my-content" [innerHTML]="sceneryData?.address"></p>
+        </div>
+        <div class="border" *ngIf="sceneryData?.summary != null">
+            <p class="subtitle"><b>景点介绍</b></p>
+            <p class="my-content" [innerHTML]="sceneryData?.summary"></p>
+        </div>
+        <div class="border" *ngIf="sceneryData?.attention != null">
+            <p class="subtitle"><b>注意事项</b></p>
+            <p class="my-content" [innerHTML]="sceneryData?.attention"></p>
+        </div>
+        <div class="border" *ngIf="sceneryData?.coupon != null">
+            <p class="subtitle"><b>优惠政策</b></p>
+            <p class="my-content" [innerHTML]="sceneryData?.coupon"></p>
+        </div>
+    </div>
+</ion-content>
