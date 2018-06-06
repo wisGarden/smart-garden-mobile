@@ -217,4 +217,12 @@ export class DiseaseReasoningPage {
             document.getElementById("nextButton").innerHTML = "下一题";
         }
     }
+
+    changeNumStyle(num) {
+        if( num >= 0 && num < 10) {
+            return '0' + num;
+        } else {
+            return num + '';
+        }
+    }
 }

@@ -1,4 +1,10 @@
 page-disease-reasoning {
+  .big-num {
+    font-size: 36px;
+    color: #479DF7;
+    margin: 40px 0 0 0;
+    padding: 0 22px;
+  }
   .flex {
     display: flex;
   }
@@ -6,7 +12,7 @@ page-disease-reasoning {
     padding: 0 1.4em;
     font-size: 16px;
     line-height: 20px;
-    margin-top: 40px;
+    margin-top: 0;
   }
   .option {
     margin: 1em 1em;
@@ -14,11 +20,12 @@ page-disease-reasoning {
     border-radius: 4px;
   }
   .option:active {
-    background: #EFEFEF;
     border: 2px solid #479DF7;
   }
   .option-active {
     border: 2px solid #479DF7;
+    background-color: #7ecef4;
+    color: #FFFFFF;
   }
   .justify {
     text-align: justify;
@@ -51,16 +58,18 @@ page-disease-reasoning {
   }
 
   .footer-button {
-    color: #479DF7;
+    color: #000000;
     font-size: 18px;
     background: none;
-    border: 1px solid #479DF7;
+    border: 2px solid #EFEFEF;
     border-radius: 1.5em;
     padding: 0.8em 1em;
   }
 
   .footer-button:active {
+    color: #479DF7;
     background: #EFEFEF;
+    border: 2px solid #479DF7;
   }
 
   .width-100 {

@@ -1,4 +1,10 @@
 page-insect-reasoning {
+  .big-num {
+    font-size: 36px;
+    color: #479DF7;
+    margin: 40px 0 0 0;
+    padding: 0 22px;
+  }
   .flex {
     display: flex;
   }
@@ -6,7 +12,7 @@ page-insect-reasoning {
     padding: 0 1.4em;
     font-size: 16px;
     line-height: 20px;
-    margin-top: 40px;
+    margin-top: 0;
   }
   .option {
     margin: 1em 1em;
@@ -14,11 +20,12 @@ page-insect-reasoning {
     border-radius: 4px;
   }
   .option:active {
-    background: #EFEFEF;
     border: 2px solid #479DF7;
   }
   .option-active {
     border: 2px solid #479DF7;
+    background-color: #7ecef4;
+    color: #FFFFFF;
   }
   .justify {
     text-align: justify;

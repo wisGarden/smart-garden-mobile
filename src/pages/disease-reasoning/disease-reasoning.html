@@ -1,7 +1,8 @@
 <title-bar pageTitle="{{plantName}}病害推理" startIconName="md-close" searchIconName="" endIconName=""
            isSearch="true"></title-bar>
 <ion-content class="margin-top-3">
-    <p class="question">{{currentPage}}. {{options[currentPage - 1]?.question}}</p>
+    <p class="big-num">{{changeNumStyle(currentPage)}}.</p>
+    <p class="question">{{options[currentPage - 1]?.question}}</p>
     <ion-grid class="margin-bottom-7">
         <ion-row class="option" *ngFor="let option of options[currentPage - 1]?.options;let i = index" (click)="border_active(i, false)">
                 <ng-template #noImageTemplate>
